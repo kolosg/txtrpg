@@ -295,7 +295,7 @@ def setup_game():
         if player_job.lower() in valid_jobs:
             myPlayer.job = player_job
             print('You are now a ' + player_job + '!\n')
-if myPlayer.job is 'warrior':
+    if myPlayer.job is 'warrior':
         self.hp = 140
         self.mp = 20
     if myPlayer.job is 'mage':
