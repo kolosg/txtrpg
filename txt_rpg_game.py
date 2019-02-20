@@ -343,3 +343,5 @@ if myPlayer.job is 'warrior':
 
 
 first_screen_options()
+
+csa
