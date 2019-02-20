@@ -4,7 +4,7 @@ import sys
 import time
 import textwrap
 import random
-import os
+import os 
 import cmd
 
 screen_width = 100
@@ -74,9 +74,9 @@ LEFT = "left", "west"
 RIGHT = "right", "east"
 
 solved_places = {
-                    "a1": False, "spider nest": False, "a3": False, "a4": False,
-                    "b1": False, "cave entrance": False, "b3": False, "b4": False,
-                    "c1": False, "c2": False, "c3": False, "c4": False,
+                    "a1": False, "spider nest": False, "a3": False, "a4": False, 
+                    "b1": False, "cave entrance": False, "b3": False, "b4": False, 
+                    "c1": False, "c2": False, "c3": False, "c4": False, 
                     "d1": False, "d2": False, "d3": False, "d4": False, }
 
 zone_map = {"a1": {
@@ -123,6 +123,7 @@ zone_map = {"a1": {
                     DOWN: "c1",
                     LEFT: "",
                     RIGHT: "cave entrance"},
+
             "cave entrance": {
                     DESCRIPTION: "You find yourself in a dark cave.\nThe only source of light is a 'torch' on the wall next to you.\nMaybe should 'examine' it\nTry 'examine torch'.\n",
                     LOOK: "examine",
@@ -231,6 +232,7 @@ def print_location():
         sys.stdout.flush()
         time.sleep(0.05)
 
+
 def prompt():
     print_location()
     print("\n" + "==========================")
@@ -252,8 +254,8 @@ def prompt():
 
 def player_look():
     print(zone_map[myPlayer.location][LOOK])
-    prompt() 
-    
+    prompt()
+
 
 def player_move(myAction):
     ask = "Where would you like to move to?\n"
@@ -270,7 +272,7 @@ def player_move(myAction):
     elif dest in ["right", "east"]:
         destination = zone_map[myPlayer.location][RIGHT]
         movement_handler(destination)
-
+    
 
 def movement_handler(destination):
     print("\n" + "You have moved to the " + destination + ".")
@@ -282,7 +284,7 @@ def player_examine(action):
     if zone_map[myPlayer.location][SOLVED]:
         print("You have already exhausted this zone.")
     else:
-        print("You can do something here.")
+        print("You can trigger a puzzle here.")
 
 
 def main_game_loop():
