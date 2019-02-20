@@ -344,4 +344,4 @@ if myPlayer.job is 'warrior':
 
 first_screen_options()
 
-csa
+# AZT A KURVA
