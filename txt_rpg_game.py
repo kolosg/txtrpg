@@ -15,6 +15,12 @@ class player:
         self.hp = 0
         self.mp = 0
         self.status_effects = []
+        self.magic_attack = 0
+        self.attack = 0
+        self.defense = 0
+        self.armor = 0
+        self.luck = 0
+        self.backpack = []
         self.location = 'cave entrance'
         self.game_over = False
 
@@ -106,7 +112,7 @@ zone_map = {"a1": {DESCRIPTION: "description",
                     DOWN: "c1",
                     LEFT: "",
                     RIGHT: "cave entrance"},
-            "cave entrance": {DESCRIPTION: """You find yourself in a dark cave.\nThe only source of light is a "torch" on the wall next to you.\nMaybe should "examine" it""",
+            "cave entrance": {DESCRIPTION: "You find yourself in a dark cave.\nThe only source of light is a 'torch' on the wall next to you.\nMaybe should 'examine' it\nTry 'examine torch'.\n",
                     LOOK: "examine",
                     SOLVED: False,
                     UP: "spider nest",
@@ -186,7 +192,10 @@ zone_map = {"a1": {DESCRIPTION: "description",
 
 def print_location():
     print("# " + myPlayer.location.upper() + " #\n")
-    print(zone_map[myPlayer.location][DESCRIPTION])
+    for character in zone_map[myPlayer.location][DESCRIPTION]:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.05)
 
 
 def prompt():
@@ -202,8 +211,15 @@ def prompt():
         sys.exit()
     elif action.lower() in ["move", "go", "travel" "walk"]:
         player_move(action.lower())
-    elif action.lower() in ["examine", "inspect", "interact", "look"]:
-        player_examine(action.lower())
+    elif action.lower() in ["examine", "inspect", "interact"]:
+        player_examin(action.lower())
+    elif action.lower() is "look":
+        player_look()
+
+
+def player_look():
+    print(zone_map[myPlayer.location][LOOK])
+    prompt()
 
 
 def player_move(myAction):
@@ -276,12 +292,24 @@ def setup_game():
     if myPlayer.job is 'warrior':
         self.hp = 140
         self.mp = 20
+        self.attack = 10
+        self.magic_attack = 1
+        self.defense = 19
+        self.armor = 0
     if myPlayer.job is 'mage':
         self.hp = 40
         self.mp = 120
+        self.attack = 4
+        self.magic_attack = 18
+        self.defense = 8
+        self.armor = 0
     if myPlayer.job is 'priest':
         self.hp = 80
         self.mp = 80
+        self.attack = 10
+        self.magic_attack = 10
+        self.defense = 10
+        self.armor = 0
 
     question3 = 'Welcome, ' + player_name + " the " + player_job + ".\n"
     for character in question3:
@@ -315,7 +343,7 @@ def setup_game():
     print('###############')
     print("# Let's Start #")
     print('###############')
-    time.sleep(5)
+    time.sleep(1)
     os.system('clear')
     main_game_loop()
 
