@@ -16,8 +16,8 @@ class player:
         self.hp = 0
         self.mp = 0
         self.status_effects = []
-        self.attack = 0
         self.magic_attack = 0
+        self.attack = 0
         self.defense = 0
         self.armor = 0
         self.luck = 0
@@ -122,10 +122,9 @@ zone_map = {"a1": {
                     UP: "a1",
                     DOWN: "c1",
                     LEFT: "",
-                    RIGHT: "cave entrance"
-                    },
+                    RIGHT: "cave entrance"},
             "cave entrance": {
-                    DESCRIPTION: """You find yourself in a dark cave.\nThe only source of light is a "torch" on the wall next to you.\nMaybe should "examine" it""",
+                    DESCRIPTION: "You find yourself in a dark cave.\nThe only source of light is a 'torch' on the wall next to you.\nMaybe should 'examine' it\nTry 'examine torch'.\n",
                     LOOK: "examine",
                     SOLVED: False,
                     UP: "spider nest",
@@ -232,7 +231,6 @@ def print_location():
         sys.stdout.flush()
         time.sleep(0.05)
 
-
 def prompt():
     print_location()
     print("\n" + "==========================")
@@ -254,8 +252,8 @@ def prompt():
 
 def player_look():
     print(zone_map[myPlayer.location][LOOK])
-    prompt()
-
+    prompt() 
+    
 
 def player_move(myAction):
     ask = "Where would you like to move to?\n"
@@ -284,7 +282,7 @@ def player_examine(action):
     if zone_map[myPlayer.location][SOLVED]:
         print("You have already exhausted this zone.")
     else:
-        print("You can trigger a puzzle here.")
+        print("You can do something here.")
 
 
 def main_game_loop():
