@@ -15,32 +15,17 @@ class player:
         self.hp = 0
         self.mp = 0
         self.status_effects = []
-        self.location = ''
+        self.location = 'cave entrance'
+        self.game_over = False
+
+
 myPlayer = player()
 
-#class room:
-#    def __init__(self, filename):
-#        open file ...
-#        read components ...
-#
-#        self.name = room_name_from_file
-#        self.text = room_text_from_file
-#        self.directions = [name_up, name_right, name_down, name_left]
-#        self.actions = {talk: {msg: "The dragon attacks!", enemy_name: "Susu", enemy_hp: 10, fight: True, reward: "HP+3", end_game: False}}
-#
-#    def do_command(command):
-#        if c=='\'
-#
-#    def display(self):
-#        print(self.text)
-#        input()
-#        redirect
 
-# first screen
 def first_screen_options():
     option = input("->")
     if option.lower() == ("play"):
-        second_screen()
+        setup_game()
     elif option.lower() == ("help"):
         help_screen()
     elif option.lower() == ("quit"):
@@ -49,7 +34,7 @@ def first_screen_options():
         print("Don't try to cheat! Enter a valid command!")
         option = input("->")
         if option.lower() == ("play"):
-            second_screen()
+            setup_game()
         elif option.lower() == ("help"):
             help_screen()
         elif option.lower() == ("quit"):
@@ -73,144 +58,140 @@ def help_screen():
     first_screen_options()
 
 
-def start_game():
+DESCRIPTION = "description"
+LOOK = "examine"
+SOLVED = False
+UP = "up", "north"
+DOWN = "down", "south"
+LEFT = "left", "west"
+RIGHT = "right", "east"
 
-    DESCRIPTION = "description"
-    EXAMINATION = "examine"
-    SOLVED = False
-    UP = "up", "north"
-    DOWN = "down", "south"
-    LEFT = "left", "west"
-    RIGHT = "right", "east"
+solved_places = {"a1": False, "spider nest": False, "a3": False, "a4": False, 
+                "b1": False, "cave entrance": False, "b3": False, "b4": False, 
+                "c1": False, "c2": False, "c3": False, "c4": False, 
+                "d1": False, "d2": False, "d3": False, "d4": False, }
 
-    solved_places = {"a1": False, "a2": False, "a3": False, "a4": False, 
-                    "b1": False, "b2": False, "b3": False, "b4": False, 
-                    "c1": False, "c2": False, "c3": False, "c4": False, 
-                    "d1": False, "d2": False, "d3": False, "d4": False, }
+zone_map = {"a1": {DESCRIPTION: "description",
+                    LOOK: "examine",
+                    SOLVED: False,
+                    UP: "",
+                    DOWN: "b1",
+                    LEFT: "",
+                    RIGHT: "spider nest"},
+            "spider nest": {DESCRIPTION: "description",
+                    LOOK: "examine",
+                    SOLVED: False,
+                    UP: "",
+                    DOWN: "cave entrance",
+                    LEFT: "a1",
+                    RIGHT: "a3"},
+            "a3": {DESCRIPTION: "description",
+                    LOOK: "examine",
+                    SOLVED: False,
+                    UP: "",
+                    DOWN: "b3",
+                    LEFT: "spider nest",
+                    RIGHT: "a4"},
+            "a4": {DESCRIPTION: "description",
+                    LOOK: "examine",
+                    SOLVED: False,
+                    UP: "",
+                    DOWN: "b4",
+                    LEFT: "a3",
+                    RIGHT: ""},
+            "b1": {DESCRIPTION: "description",
+                    LOOK: "examine",
+                    SOLVED: False,
+                    UP: "a1",
+                    DOWN: "c1",
+                    LEFT: "",
+                    RIGHT: "cave entrance"},
+            "cave entrance": {DESCRIPTION: """You find yourself in a dark cave.\nThe only source of light is a "torch" on the wall next to you.\nMaybe should "examine" it""",
+                    LOOK: "examine",
+                    SOLVED: False,
+                    UP: "spider nest",
+                    DOWN: "c2",
+                    LEFT: "b1",
+                    RIGHT: "b3"},
+            "b3": {DESCRIPTION: "description",
+                    LOOK: "examine",
+                    SOLVED: False,
+                    UP: "a3",
+                    DOWN: "c3",
+                    LEFT: "cave entrance",
+                    RIGHT: "b4"},
+            "b4": {DESCRIPTION: "description",
+                    LOOK: "examine",
+                    SOLVED: False,
+                    UP: "a4",
+                    DOWN: "c4",
+                    LEFT: "b3",
+                    RIGHT: ""},
+            "c1": {DESCRIPTION: "description",
+                    LOOK: "examine",
+                    SOLVED: False,
+                    UP: "b1",
+                    DOWN: "d1",
+                    LEFT: "",
+                    RIGHT: "c2"},
+            "c2": {DESCRIPTION: "description",
+                    LOOK: "examine",
+                    SOLVED: False,
+                    UP: "cave entrance",
+                    DOWN: "d2",
+                    LEFT: "c1",
+                    RIGHT: "c3"},
+            "c3": {DESCRIPTION: "description",
+                    LOOK: "examine",
+                    SOLVED: False,
+                    UP: "b3",
+                    DOWN: "d3",
+                    LEFT: "c2",
+                    RIGHT: "c4"},
+            "c4": {DESCRIPTION: "description",
+                    LOOK: "examine",
+                    SOLVED: False,
+                    UP: "b4",
+                    DOWN: "d4",
+                    LEFT: "c3",
+                    RIGHT: ""},
+            "d1": {DESCRIPTION: "description",
+                    LOOK: "examine",
+                    SOLVED: False,
+                    UP: "c1",
+                    DOWN: "",
+                    LEFT: "",
+                    RIGHT: "d2"},
+            "d2": {DESCRIPTION: "description",
+                    LOOK: "examine",
+                    SOLVED: False,
+                    UP: "c2",
+                    DOWN: "",
+                    LEFT: "d1",
+                    RIGHT: "d3"},
+            "d3": {DESCRIPTION: "description",
+                    LOOK: "examine",
+                    SOLVED: False,
+                    UP: "c3",
+                    DOWN: "",
+                    LEFT: "d2",
+                    RIGHT: "d4"},
+            "d4": {DESCRIPTION: "description",
+                    LOOK: "examine",
+                    SOLVED: False,
+                    UP: "c4",
+                    DOWN: "",
+                    LEFT: "d3",
+                    RIGHT: ""}}
 
-    zone_map = {"a1": {DESCRIPTION: "description",
-                       EXAMINATION: "examine",
-                       SOLVED: False,
-                       UP: "",
-                       DOWN: "b1",
-                       LEFT: "",
-                       RIGHT: "a2"},
-                "a2": {DESCRIPTION: "description",
-                       EXAMINATION: "examine",
-                       SOLVED: False,
-                       UP: "",
-                       DOWN: "b2",
-                       LEFT: "a1",
-                       RIGHT: "a3"},
-                "a3": {DESCRIPTION: "description",
-                       EXAMINATION: "examine",
-                       SOLVED: False,
-                       UP: "",
-                       DOWN: "b3",
-                       LEFT: "a2",
-                       RIGHT: "a4"},
-                "a4": {DESCRIPTION: "description",
-                       EXAMINATION: "examine",
-                       SOLVED: False,
-                       UP: "",
-                       DOWN: "b4",
-                       LEFT: "a3",
-                       RIGHT: ""},
-                "b1": {DESCRIPTION: "description",
-                       EXAMINATION: "examine",
-                       SOLVED: False,
-                       UP: "a1",
-                       DOWN: "c1",
-                       LEFT: "",
-                       RIGHT: "b2"},
-                "b2": {DESCRIPTION: "description",
-                       EXAMINATION: "examine",
-                       SOLVED: False,
-                       UP: "a2",
-                       DOWN: "c2",
-                       LEFT: "b1",
-                       RIGHT: "b3"},
-                "b3": {DESCRIPTION: "description",
-                       EXAMINATION: "examine",
-                       SOLVED: False,
-                       UP: "a3",
-                       DOWN: "c3",
-                       LEFT: "b2",
-                       RIGHT: "b4"},
-                "b4": {DESCRIPTION: "description",
-                       EXAMINATION: "examine",
-                       SOLVED: False,
-                       UP: "a4",
-                       DOWN: "c4",
-                       LEFT: "b3",
-                       RIGHT: ""},
-                "c1": {DESCRIPTION: "description",
-                       EXAMINATION: "examine",
-                       SOLVED: False,
-                       UP: "b1",
-                       DOWN: "d1",
-                       LEFT: "",
-                       RIGHT: "c2"},
-                "c2": {DESCRIPTION: "description",
-                       EXAMINATION: "examine",
-                       SOLVED: False,
-                       UP: "b2",
-                       DOWN: "d2",
-                       LEFT: "c1",
-                       RIGHT: "c3"},
-                "c3": {DESCRIPTION: "description",
-                       EXAMINATION: "examine",
-                       SOLVED: False,
-                       UP: "b3",
-                       DOWN: "d3",
-                       LEFT: "c2",
-                       RIGHT: "c4"},
-                "c4": {DESCRIPTION: "description",
-                       EXAMINATION: "examine",
-                       SOLVED: False,
-                       UP: "b4",
-                       DOWN: "d4",
-                       LEFT: "c3",
-                       RIGHT: ""},
-                "d1": {DESCRIPTION: "description",
-                       EXAMINATION: "examine",
-                       SOLVED: False,
-                       UP: "c1",
-                       DOWN: "",
-                       LEFT: "",
-                       RIGHT: "d2"},
-                "d2": {DESCRIPTION: "description",
-                       EXAMINATION: "examine",
-                       SOLVED: False,
-                       UP: "c2",
-                       DOWN: "",
-                       LEFT: "d1",
-                       RIGHT: "d3"},
-                "d3": {DESCRIPTION: "description",
-                       EXAMINATION: "examine",
-                       SOLVED: False,
-                       UP: "c3",
-                       DOWN: "",
-                       LEFT: "d2",
-                       RIGHT: "d4"},
-                "d4": {DESCRIPTION: "description",
-                       EXAMINATION: "examine",
-                       SOLVED: False,
-                       UP: "c4",
-                       DOWN: "",
-                       LEFT: "d3",
-                       RIGHT: ""}}
-
-
-def print location():
-    print("\n" + ("#" * (4 + len(myPlayer.location))))
-    print("#" + myPlayer.location.upper() + "#")
-    print("#" + zonemap[myPlayer.location][DESCRIPTION]) # EZ SZERINTEM ITT LOCATION (nem POSITION)
-    print("\n" + ("#" * (4 + len(myPlayer.location))))
+def print_location():
+    print("# " + myPlayer.location.upper() + " #\n")
+    print(zone_map[myPlayer.location][DESCRIPTION])
 
 
 def prompt():
-    print("\n" + "===============")
+    print_location()
+    print("\n" + "==========================")
     print("What would you like to do?")
     action = input("->")
     acceptable_actions = ["move", "go", "travel" "walk", "quit", "examine", "inspect", "interact", "look"]
@@ -222,23 +203,23 @@ def prompt():
     elif action.lower() in ["move", "go", "travel" "walk"]:
         player_move(action.lower())
     elif action.lower() in ["examine", "inspect", "interact", "look"]:
-        player_examin(action.lower())
+        player_examine(action.lower())
 
 
 def player_move(myAction):
     ask = "Where would you like to move to?\n"
     dest = input(ask)
     if dest in ["up", "north"]:
-        destination = zonemap[myPlayer.location][UP]
+        destination = zone_map[myPlayer.location][UP]
         movement_handler(destination)
     elif dest in ["down", "south"]:
-        destination = zonemap[myPlayer.location][DOWN]
+        destination = zone_map[myPlayer.location][DOWN]
         movement_handler(destination)
     elif dest in ["left", "west"]:
-        destination = zonemap[myPlayer.location][left]
+        destination = zone_map[myPlayer.location][LEFT]
         movement_handler(destination)
     elif dest in ["right", "east"]:
-        destination = zonemap[myPlayer.location][RIGHT]
+        destination = zone_map[myPlayer.location][RIGHT]
         movement_handler(destination)
     
 
@@ -248,15 +229,12 @@ def movement_handler(destination):
     print_location()
 
 
-def player_examin(action):
-    if zonemap[myPlayer.location][SOLVED]:
+def player_examine(action):
+    if zone_map[myPlayer.location][SOLVED]:
         print("You have already exhausted this zone.")
     else:
         print("You can trigger a puzzle here.")
 
-
-def start_game():
-    first_screen_options()
 
 
 def main_game_loop():
@@ -266,7 +244,6 @@ def main_game_loop():
 
 def setup_game():
     os.system("clear")
-
     question1 = 'What is your name?\n'
     for character in question1:
         sys.stdout.write(character)
@@ -281,7 +258,7 @@ def setup_game():
         sys.stdout.write(character)
         sys.stdout.flush()
         time.sleep(0.05)
-    for character in question2:
+    for character in question2added:
         sys.stdout.write(character)
         sys.stdout.flush()
         time.sleep(0.01)
@@ -291,11 +268,12 @@ def setup_game():
         myPlayer.job = player_job
         print('You are now a ' + player_job + '!\n')
     while player_job.lower() not in valid_jobs:
+        print(player_job.title() + " is not a valid class!")
         player_job = input('->')
         if player_job.lower() in valid_jobs:
             myPlayer.job = player_job
             print('You are now a ' + player_job + '!\n')
-if myPlayer.job is 'warrior':
+    if myPlayer.job is 'warrior':
         self.hp = 140
         self.mp = 20
     if myPlayer.job is 'mage':
@@ -305,18 +283,16 @@ if myPlayer.job is 'warrior':
         self.hp = 80
         self.mp = 80
 
-    question3 = 'Welcome, ' + player_name + "the " + player_job ".\n"
-    for character in question1:
+    question3 = 'Welcome, ' + player_name + " the " + player_job + ".\n"
+    for character in question3:
         sys.stdout.write(character)
         sys.stdout.flush()
         time.sleep(0.05)
-    player_name = input('->')
-    myPlayer.name = player_name
 
-    speech1 = 'Hello'
-    speech2 = 'Welcome'
-    speech3 = 'Hola'
-    speech4 = 'Guten tag'
+    speech1 = 'Hello\n'
+    speech2 = 'Welcome\n'
+    speech3 = 'Hola\n'
+    speech4 = 'Guten tag\n'
 
     for character in speech1:
         sys.stdout.write(character)
@@ -336,12 +312,12 @@ if myPlayer.job is 'warrior':
         time.sleep(0.05)
 
     os.system('clear')
-    print('###########')
-    print(" let's start ")
-    print('############')
+    print('###############')
+    print("# Let's Start #")
+    print('###############')
+    time.sleep(5)
+    os.system('clear')
     main_game_loop()
 
-
+second_screen()
 first_screen_options()
-
-csa
