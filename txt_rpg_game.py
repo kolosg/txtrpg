@@ -16,8 +16,13 @@ class player:
         self.hp = 0
         self.mp = 0
         self.status_effects = []
+<<<<<<< HEAD
+        self.magic_attack = 0
+        self.attack = 0
+=======
         self.attack = 0
         self.magic_attack = 0
+>>>>>>> 9f4aca1d86119e30c28947a3b11c591200d9045a
         self.defense = 0
         self.armor = 0
         self.luck = 0
@@ -122,10 +127,15 @@ zone_map = {"a1": {
                     UP: "a1",
                     DOWN: "c1",
                     LEFT: "",
+<<<<<<< HEAD
+                    RIGHT: "cave entrance"},
+            "cave entrance": {DESCRIPTION: "You find yourself in a dark cave.\nThe only source of light is a 'torch' on the wall next to you.\nMaybe should 'examine' it\nTry 'examine torch'.\n",
+=======
                     RIGHT: "cave entrance"
                     },
             "cave entrance": {
                     DESCRIPTION: """You find yourself in a dark cave.\nThe only source of light is a "torch" on the wall next to you.\nMaybe should "examine" it""",
+>>>>>>> 9f4aca1d86119e30c28947a3b11c591200d9045a
                     LOOK: "examine",
                     SOLVED: False,
                     UP: "spider nest",
