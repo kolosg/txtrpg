@@ -215,14 +215,14 @@ def prompt():
     action = input("->")
     acceptable_actions = ["move", "go", "travel" "walk", "quit", "examine", "inspect", "interact", "look"]
     while action.lower() not in acceptable_actions:
-            print("Unknown action, try again.\n")
-            action = input("->")
+        print("Unknown action, try again.\n")
+        action = input("->")
     if action.lower() == "quit":
-            sys.exit()
+        sys.exit()
     elif action.lower() in ["move", "go", "travel" "walk"]:
-            player_move(action.lower())
+        player_move(action.lower())
     elif action.lower() in ["examine", "inspect", "interact", "look"]:
-            player_examin(action.lower())
+        player_examin(action.lower())
 
 
 def player_move(myAction):
@@ -255,11 +255,91 @@ def player_examin(action):
         print("You can trigger a puzzle here.")
 
 
+def start_game():
+    first_screen_options()
 
 
+def main_game_loop():
+    while myPlayer.game_over is False:
+        prompt()
 
 
+def setup_game():
+    os.system("clear")
+
+    question1 = 'What is your name?\n'
+    for character in question1:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.05)
+    player_name = input('->')
+    myPlayer.name = player_name
+
+    question2 = 'What role do you want to play?\n'
+    question2added = ("You can play as warrior, priest or mage.\n")
+    for character in question2:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.05)
+    for character in question2:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.01)
+    player_job = input('->')
+    valid_jobs = ['warrior', 'mage', 'priest']
+    if player_job.lower() in valid_jobs:
+        myPlayer.job = player_job
+        print('You are now a ' + player_job + '!\n')
+    while player_job.lower() not in valid_jobs:
+        player_job = input('->')
+        if player_job.lower() in valid_jobs:
+            myPlayer.job = player_job
+            print('You are now a ' + player_job + '!\n')
+if myPlayer.job is 'warrior':
+        self.hp = 140
+        self.mp = 20
+    if myPlayer.job is 'mage':
+        self.hp = 40
+        self.mp = 120
+    if myPlayer.job is 'priest':
+        self.hp = 80
+        self.mp = 80
+
+    question3 = 'Welcome, ' + player_name + "the " + player_job ".\n"
+    for character in question1:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.05)
+    player_name = input('->')
+    myPlayer.name = player_name
+
+    speech1 = 'Hello'
+    speech2 = 'Welcome'
+    speech3 = 'Hola'
+    speech4 = 'Guten tag'
+
+    for character in speech1:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.05)
+    for character in speech2:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.05)
+    for character in speech3:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.05)
+    for character in speech4:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.05)
+
+    os.system('clear')
+    print('###########')
+    print(" let's start ")
+    print('############')
+    main_game_loop()
 
 
-second_screen()
-help_screen()
+first_screen_options()
