@@ -73,123 +73,157 @@ DOWN = "down", "south"
 LEFT = "left", "west"
 RIGHT = "right", "east"
 
-solved_places = {"a1": False, "spider nest": False, "a3": False, "a4": False, 
-                "b1": False, "cave entrance": False, "b3": False, "b4": False, 
-                "c1": False, "c2": False, "c3": False, "c4": False, 
-                "d1": False, "d2": False, "d3": False, "d4": False, }
+solved_places = {
+                    "a1": False, "spider nest": False, "a3": False, "a4": False, 
+                    "b1": False, "cave entrance": False, "b3": False, "b4": False, 
+                    "c1": False, "c2": False, "c3": False, "c4": False, 
+                    "d1": False, "d2": False, "d3": False, "d4": False, }
 
-zone_map = {"a1": {DESCRIPTION: "description",
+zone_map = {"a1": {
+                    DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     UP: "",
                     DOWN: "b1",
                     LEFT: "",
-                    RIGHT: "spider nest"},
-            "spider nest": {DESCRIPTION: "description",
+                    RIGHT: "spider nest"
+                    },
+            "spider nest": {
+                    DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     UP: "",
                     DOWN: "cave entrance",
                     LEFT: "a1",
-                    RIGHT: "a3"},
-            "a3": {DESCRIPTION: "description",
+                    RIGHT: "a3"
+                    },
+            "a3": {
+                    DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     UP: "",
                     DOWN: "b3",
                     LEFT: "spider nest",
-                    RIGHT: "a4"},
-            "a4": {DESCRIPTION: "description",
+                    RIGHT: "a4"
+                    },
+            "a4": {
+                    DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     UP: "",
                     DOWN: "b4",
                     LEFT: "a3",
-                    RIGHT: ""},
-            "b1": {DESCRIPTION: "description",
+                    RIGHT: ""
+                    },
+            "b1": {
+                    DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     UP: "a1",
                     DOWN: "c1",
                     LEFT: "",
-                    RIGHT: "cave entrance"},
-            "cave entrance": {DESCRIPTION: """You find yourself in a dark cave.\nThe only source of light is a "torch" on the wall next to you.\nMaybe should "examine" it""",
+                    RIGHT: "cave entrance"
+                    },
+            "cave entrance": {
+                    DESCRIPTION: """You find yourself in a dark cave.\nThe only source of light is a "torch" on the wall next to you.\nMaybe should "examine" it""",
                     LOOK: "examine",
                     SOLVED: False,
                     UP: "spider nest",
                     DOWN: "c2",
                     LEFT: "b1",
-                    RIGHT: "b3"},
-            "b3": {DESCRIPTION: "description",
+                    RIGHT: "b3"
+                    },
+            "b3": {
+                    DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     UP: "a3",
                     DOWN: "c3",
                     LEFT: "cave entrance",
-                    RIGHT: "b4"},
-            "b4": {DESCRIPTION: "description",
+                    RIGHT: "b4"
+                    },
+            "b4": {
+                    DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     UP: "a4",
                     DOWN: "c4",
                     LEFT: "b3",
-                    RIGHT: ""},
-            "c1": {DESCRIPTION: "description",
+                    RIGHT: ""
+                    },
+            "c1": {
+                    DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     UP: "b1",
                     DOWN: "d1",
                     LEFT: "",
-                    RIGHT: "c2"},
-            "c2": {DESCRIPTION: "description",
+                    RIGHT: "c2"
+                    },
+            "c2": {
+                    DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     UP: "cave entrance",
                     DOWN: "d2",
                     LEFT: "c1",
-                    RIGHT: "c3"},
-            "c3": {DESCRIPTION: "description",
+                    RIGHT: "c3"
+                    },
+            "c3": {
+                    DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     UP: "b3",
                     DOWN: "d3",
                     LEFT: "c2",
-                    RIGHT: "c4"},
-            "c4": {DESCRIPTION: "description",
+                    RIGHT: "c4"
+                    },
+            "c4": {
+                    DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     UP: "b4",
                     DOWN: "d4",
                     LEFT: "c3",
-                    RIGHT: ""},
-            "d1": {DESCRIPTION: "description",
+                    RIGHT: ""
+                    },
+            "d1": {
+                    DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     UP: "c1",
                     DOWN: "",
                     LEFT: "",
-                    RIGHT: "d2"},
-            "d2": {DESCRIPTION: "description",
+                    RIGHT: "d2"
+                    },
+            "d2": {
+                    DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     UP: "c2",
                     DOWN: "",
                     LEFT: "d1",
-                    RIGHT: "d3"},
-            "d3": {DESCRIPTION: "description",
+                    RIGHT: "d3"
+                    },
+            "d3": {
+                    DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     UP: "c3",
                     DOWN: "",
                     LEFT: "d2",
-                    RIGHT: "d4"},
-            "d4": {DESCRIPTION: "description",
+                    RIGHT: "d4"
+                    },
+            "d4": {
+                    DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     UP: "c4",
                     DOWN: "",
                     LEFT: "d3",
-                    RIGHT: ""}}
+                    RIGHT: ""
+                    }}
+
 
 def print_location():
     print("# " + myPlayer.location.upper() + " #\n")
@@ -250,7 +284,6 @@ def player_examine(action):
         print("You have already exhausted this zone.")
     else:
         print("You can do something here.")
-
 
 
 def main_game_loop():
@@ -343,9 +376,10 @@ def setup_game():
     print('###############')
     print("# Let's Start #")
     print('###############')
-    time.sleep(1.5)
+    time.sleep(1)
     os.system('clear')
     main_game_loop()
+
 
 second_screen()
 first_screen_options()
