@@ -82,116 +82,116 @@ solved_places = {
                     "c1": False, "c2": False, "c3": False, "c4": False,
                     "d1": False, "d2": False, "d3": False, "d4": False, }
 
-zone_map = {"treasure room": {
+zone_map = {"Treasure room": {
                     DESCRIPTION: "You arrived in quickie builded wooden room.\n There's a heap in the corner of the room, covered whith some nasty rags.\n",
                     LOOK: "There's no more interesting thing except of the misterious heap...\n",
                     SOLVED: False,
                     DONE : "done",
                     UP: "",
-                    DOWN: "alchemist's lab",
+                    DOWN: "Alchemist's lab",
                     LEFT: "",
-                    RIGHT: "spider nest"
+                    RIGHT: "Spider nest"
                     },
-            "spider nest": {
+            "Spider nest": {
                     DESCRIPTION: "As you",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
                     UP: "",
-                    DOWN: "cave entrance",
-                    LEFT: "treasure room",
-                    RIGHT: "hall of runes"
+                    DOWN: "Cave entrance",
+                    LEFT: "Treasure room",
+                    RIGHT: "Hall of runes"
                     },
-            "hall of runes": {
+            "Hall of runes": {
                     DESCRIPTION: "You entered a quite spacious room, where are misterious lights everywhere.\n",
                     LOOK: "As you look around in the room, you realize that the lights are luminous runes on the wall...\n",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
                     UP: "",
-                    DOWN: "cavern swamp",
-                    LEFT: "spider nest",
-                    RIGHT: "salacite cavern"
+                    DOWN: "Cavern swamp",
+                    LEFT: "Spider nest",
+                    RIGHT: "Salacite cavern"
                     },
-            "salacite cavern": {
+            "Salacite cavern": {
                     DESCRIPTION: "This place is like a tipical cavern.\n",
                     LOOK: "You see nothing special...\n Big salacites everywhere...\n But you suddenly realize that something was written on one.\n",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
                     UP: "",
-                    DOWN: "grave",
-                    LEFT: "hall of runes",
+                    DOWN: "Grave",
+                    LEFT: "Hall of runes",
                     RIGHT: ""
                     },
-            "alchemist's lab": {
+            "Alchemist's lab": {
                     DESCRIPTION: "You arrive to a strange place.. It seems like a chemisty lab...\n",
                     LOOK: "You see a table full with strage bottles and equipments on it.\n",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "treasure room",
-                    DOWN: "lost man's hide",
+                    UP: "Treasure room",
+                    DOWN: "Lost man's hide",
                     LEFT: "",
-                    RIGHT: "cave entrance"
+                    RIGHT: "Cave entrance"
                     },
-            "cave entrance": {
+            "Cave entrance": {
                     DESCRIPTION: "You find yourself in a dark cave.\nThe only source of light is a 'torch' on the wall next to you.\nMaybe should 'examine' it.\n",
                     LOOK: "You see 'rock' in the corner with a carved opening.\nIt looks suspicious.\nThere are also four openings to the north, south, east and west.\n",
                     SOLVED: False,
                     DONE: "You have already collected everything in this cave.\nYou can go ahead to north, south, west, east.\n",
                     ITEMS: "rocktorch",
-                    UP: "spider nest",
-                    DOWN: "room of altar",
-                    LEFT: "alchemist's lab",
-                    RIGHT: "cavern swamp"
+                    UP: "Spider nest",
+                    DOWN: "Room of altar",
+                    LEFT: "Alchemist's lab",
+                    RIGHT: "Cavern swamp"
                     },
-            "cavern swamp": {
+            "Cavern swamp": {
                     DESCRIPTION: "As you enter this place, suddenly a disgusting smell hit your nose...\n It's like a marsh...\n",
                     LOOK: "As you look around, you see that there's a small pound full of chrystal clear water in the marsh...\n Really strange...\n",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "hall of runes",
-                    DOWN: "mirrors cavern",
-                    LEFT: "cave entrance",
-                    RIGHT: "grave"
+                    UP: "Hall of runes",
+                    DOWN: "Mirrors cavern",
+                    LEFT: "Cave entrance",
+                    RIGHT: "Grave"
                     },
-            "grave": {
+            "Grave": {
                     DESCRIPTION: "You enter a dark cavern...\n Suddenly something crashing under your foot...\n",
                     LOOK: "You see that bones and corpses everywhere in this place.\n One of them looks really strange...\n",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "salacite cavern",
-                    DOWN: "gobling's cavern",
-                    LEFT: "cavern swamp",
+                    UP: "Salacite cavern",
+                    DOWN: "Gobling's cavern",
+                    LEFT: "Cavern swamp",
                     RIGHT: ""
                     },
-            "lost man's hide": {
+            "Lost man's hide": {
                     DESCRIPTION: "You find yourself is a drak cavern whitch like a catacomb...",
                     LOOK: "You see a human shape in the back of the cavern...\n As you step closer you see a matted, thin man who seems totally lost...\n",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "alchemist lab",
-                    DOWN: "christall cavern",
+                    UP: "Alchemist lab",
+                    DOWN: "Christall cavern",
                     LEFT: "",
-                    RIGHT: "room of altar"
+                    RIGHT: "Room of altar"
                     },
-            "room of altar": {
+            "Room of altar": {
                     DESCRIPTION: "This place looks like permise of a temple from an ancient time.\n",
                     LOOK: "You realize that a small altar is in the middle of this place.\n",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "cave entrance",
-                    DOWN: "haunted cavern",
-                    LEFT: "lost man's hide",
-                    RIGHT: "mirrors cavern"
+                    UP: "Cave entrance",
+                    DOWN: "Haunted cavern",
+                    LEFT: "Lost man's hide",
+                    RIGHT: "Mirrors cavern"
                     },
-            "mirrors cavern": {
+            "Mirrors cavern": {
                     DESCRIPTION: "As you enter this place, you see yourself on the walls...\n You feel confused...\n",
                     LOOK: "It looks like all the walls are made from mirror...\n You don't even know where are you going...\n",
                     SOLVED: False,
@@ -202,59 +202,59 @@ zone_map = {"treasure room": {
                     LEFT: "c2",
                     RIGHT: "c4"
                     },
-            "goblin's cavern": {
+            "Goblin's cavern": {
                     DESCRIPTION: "You entered a place where small used stuff everywhere... and bones too...smoething smells bad...\n",
                     LOOK: "You see a small person in strange cloths.\n He seems angry because you entered his territory...\n",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "grave",
-                    DOWN: "smuggler's hide",
-                    LEFT: "mirrors cavern",
+                    UP: "Grave",
+                    DOWN: "Smuggler's hide",
+                    LEFT: "Mirrors cavern",
                     RIGHT: ""
                     },
-            "christall cavern": {
+            "Christall cavern": {
                     DESCRIPTION: "This place is really strange. Colourful chrystalls everywhere..\n And stuffs... which looks like the equipment for some dark ritual...\n",
                     LOOK: "You see a pretty woman who seems really attractive, but you feel that not everything is fine with her...\n",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "lost man's hide",
+                    UP: "Lost man's hide",
                     DOWN: "",
                     LEFT: "",
-                    RIGHT: "haunted cavern"
+                    RIGHT: "Haunted cavern"
                     },
-            "haunted cavern": {
+            "Haunted cavern": {
                     DESCRIPTION: "You entered a place which looks like a normal part of a cave...\n",
                     LOOK: "You see a shape of a person... But as you get closer his body looks transparent...\n It's a ghost!\n ",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "room of altar",
+                    UP: "Room of altar",
                     DOWN: "",
-                    LEFT: "christall cavern",
-                    RIGHT: "hide-out"
+                    LEFT: "Christall cavern",
+                    RIGHT: "Hide-out"
                     },
-            "hide-out": {
+            "Hide-out": {
                     DESCRIPTION: "You step into place which look like a room formed to hide...\n A human's stuff everywhere...\n",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "mirrors cavern",
+                    UP: "Mirrors cavern",
                     DOWN: "",
-                    LEFT: "haunted cavern",
-                    RIGHT: "smuggler's hide"
+                    LEFT: "Haunted cavern",
+                    RIGHT: "Smuggler's hide"
                     },
-            "smuggler's hide": {
+            "Smuggler's hide": {
                     DESCRIPTION: "This dark place looks like a storage... Every kind of stuff inside.\n",
                     LOOK: "You see a thin man inside packing up the stuffs\n",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "goblin's cavern",
+                    UP: "Goblin's cavern",
                     DOWN: "",
-                    LEFT: "hide-out",
+                    LEFT: "Hide-out",
                     RIGHT: ""
                     }}
 
