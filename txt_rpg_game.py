@@ -51,6 +51,10 @@ def first_screen_options():
 
 def second_screen():
     os.system('clear')
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8207e81a2f4c77a7aadf043cecdb88c95c42efdb
     print(' Welcome! ')
     print(' - Play - ')
     print(' - Help - ')
@@ -77,10 +81,24 @@ ITEMS = "items"
 
 
 solved_places = {
+<<<<<<< HEAD
                     "treasure room": False, "spider nest": False, "a3": False, "a4": False,
                     "b1": False, "cave entrance": False, "b3": False, "b4": False,
                     "c1": False, "c2": False, "c3": False, "c4": False,
                     "d1": False, "d2": False, "d3": False, "d4": False, }
+=======
+                    "Treasure room": False, "Spider nest": False, "Hall of runes": False, "Salacite cavern": False,
+                    "Alchemist's lab": False, "Cave entrance": False, "Cavern swamp": False, "Grave": False,
+                    "Lost man's hide": False, "Room of altar": False, "Mirrors cavern": False, "Goblin's cavern": False,
+                    "Christall cavern": False, "Haunted cavern": False, "Hide-out": False, "Smuggler's hide": False, }
+
+visited_places = {
+                    "Treasure room": False, "Spider nest": False, "Hall of runes": False, "Salacite cavern": False,
+                    "Alchemist's lab": False, "Cave entrance": True, "Cavern swamp": False, "Grave": False,
+                    "Lost man's hide": False, "Room of altar": False, "Mirrors cavern": False, "Goblin's cavern": False,
+                    "Christall cavern": False, "Haunted cavern": False, "Hide-out": False, "Smuggler's hide": False, }
+
+>>>>>>> 8207e81a2f4c77a7aadf043cecdb88c95c42efdb
 
 zone_map = {"Treasure room": {
                     DESCRIPTION: "You arrived in quickie builded wooden room.\n There's a heap in the corner of the room, covered whith some nasty rags.\n",
@@ -313,6 +331,7 @@ def status():
 
 
 def zones():
+<<<<<<< HEAD
     zone = [""]
     print(" –––––––––––––––––––")
     print("| a1 | a2 | a3 | a4 |")
@@ -323,6 +342,147 @@ def zones():
     print("|–––––––––––––––––––|")
     print("| d1 | d2 | d3 | d4 |")
     print(" –––––––––––––––––––")
+=======
+
+    """Treasure room": False, "Spider nest": False, "Hall of runes": False, "Salacite cavern": False,
+    "Alchemist's lab": False, "Cave entrance": False, "Cavern swamp": False, "Grave": False,
+    "Lost man's hide": False, "Room of altar": False, "Mirrors cavern": False, "Goblin's cavern": False,
+    "Christall cavern": False, "Haunted cavern": False, "Hide-out": False, "Smuggler's hide": False"""
+
+    if visited_places["Treasure room"] == True:
+        if myPlayer.location == "Threasure room":
+            a1 = "You are here"
+        else:
+            a1 = "Threasure room"
+    else:
+        a1 = 18 * " "
+    if visited_places["Spider nest"] == True:
+        if myPlayer.location == "Spider nest":
+            a2 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
+        else:
+            a2 = "Spider nest"
+    else:
+        a2 = 18 * " "
+    if visited_places["Hall of runes"] == True:
+        if myPlayer.location == "Hall of runes":
+            a3 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
+        else:
+            a3 = "Hall of runes"
+    else:
+        a3 = 18 * " "
+    if visited_places["Salacite cavern"] == True:
+        if myPlayer.location == "Salacite cavern":
+            a4 = "You are here"
+        else:
+            a4 = "Salacite cavern"
+    else:
+        a4 = 18 * " "
+    if visited_places["Alchemist's lab"] == True:
+        if myPlayer.location == "Alchemist's lab":
+            b1 = "You are here"
+        else:
+            b1 = "Alchemist's lab"
+    else:
+        b1 = 18 * " "
+    if visited_places["Cave entrance"] == True:
+        if myPlayer.location == "Cave entrance":
+            b2 = "You are here"
+        else:
+            b2 = "Cave entrance"
+    else:
+        b2 = 18 * " "
+    if visited_places["Cavern swamp"] == True:
+        if myPlayer.location == "Cavern swamp":
+            b3 = "You are here"
+        else:
+            b3 = "Cavern swamp"
+    else:
+        b3 = 18 * " "
+    if visited_places["Grave"] == True:
+        if myPlayer.location == "Grave":
+            b4 = "You are here"
+        else:
+            b4 = "Grave"
+    else:
+        b4 = 18 * " "
+    if visited_places["Lost man's hide"] == True:
+        if myPlayer.location == "Lost man's hide":
+            c1 = "You are here"
+        else:
+            c1 = "Lost man's hide"
+    else:
+        c1 = 18 * " "
+    if visited_places["Room of altar"] == True:
+        if myPlayer.location == "Room of altar":
+            c2 = "You are here"
+        else:
+            c2 = "Room of altar"
+    else:
+        c2 = 18 * " "
+    if visited_places["Mirrors cavern"] == True:
+        if myPlayer.location == "Mirrors cavern":
+            c3 = "You are here"
+        else:
+            c3 = "Mirrors cavern"
+    else:
+        c3 = 18 * " "
+    if visited_places["Goblin's cavern"] == True:
+        if myPlayer.location == "Goblin's cavern":
+            c4 = "You are here"
+        else:
+            c4 = "Goblin's cavern"
+    else:
+        c4 = 18 * " "
+    if visited_places["Christall cavern"] == True:
+        if myPlayer.location == "Christall cavern":
+            d1 = "You are here"
+        else:
+            d1 = "Christall cavern"
+    else:
+        d1 = 18 * " "
+    if visited_places["Haunted cavern"] == True:
+        if myPlayer.location == "Haunted cavern":
+            d2 = "You are here"
+        else:
+            d2 = "Haunted cavern"
+    else:
+        d2 = 18 * " "
+    if visited_places["Hide-out"] == True:
+        if myPlayer.location == "Hide-out":
+            d3 = "You are here"
+        else:
+            d3 = "Hide-out"
+    else:
+        d3 = 18 * " "
+    if visited_places["Smuggler's hide"] == True:
+        if myPlayer.location == "Smuggler's hide":
+            d4 = (20 - len("You are here") / 2) * " " + "You are here" + (20 - len("You are here") / 2) * " "
+        else:
+            d4 = "Smuggler's hide"
+    else:
+        d4 = 18 * " "
+    
+    len_of_map = 4 * 20 + 3
+
+    print(" " + len_of_map * "–")
+    print("| " + len_of_map * " ")
+    print("| "+a1+" | "+a2+" | "+a3+" | "+a4+" |")
+    print("| " + len_of_map * " ")
+    print("| " + len_of_map * "–")
+    print("| " + len_of_map * " ")
+    print("| "+b1+" | "+b2+" | "+b3+" | "+b4+" |")
+    print("| " + len_of_map * " ")
+    print("| " + len_of_map * "–")
+    print("| " + len_of_map * " ")
+    print("| "+c1+" | "+c2+" | "+c3+" | "+c4+" |")
+    print("| " + len_of_map * " ")
+    print("| " + len_of_map * "–")
+    print("| " + len_of_map * " ")
+    print("| "+d1+" | "+d2+" | "+d3+" | "+d4+" |")
+    print("| " + len_of_map * " ")
+    print("| " + len_of_map * "–")
+    print(" " + len_of_map * " ")
+>>>>>>> 8207e81a2f4c77a7aadf043cecdb88c95c42efdb
 
 
 def player_look(action):
@@ -359,6 +519,7 @@ def player_move(action):
 def movement_handler(destination):
     os.system('clear')
     myPlayer.location = destination
+    visited_places[myPlayer.location] = True
     print_location()
 
 
@@ -459,7 +620,7 @@ def setup_game():
         sys.stdout.flush()
         time.sleep(0.01)
 
-    speech1 = 'You have finally finished your training in the ' + player_job + ' clan\n'
+    """speech1 = 'You have finally finished your training in the ' + player_job + ' clan\n'
     speech2 = 'The head of the ' + player_job + ' clan gives you, a special mission.\n'
     speech3 = 'He tells you that a member of the Clan has become a betrayer and he stole the Golden Idol of the Clan\n'
     speech4 = 'Your mission will be to find the traitor and bring back the Golden Idol! Your master tells you where to look for the traitor..\n'
@@ -484,7 +645,7 @@ def setup_game():
     for character in speech5:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.01)
+        time.sleep(0.01)"""
 
     time.sleep(1)
     os.system('clear')
