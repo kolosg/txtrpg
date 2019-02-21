@@ -3,7 +3,7 @@ class spider:
         self.name = 'Giant Spider'
         self.hp = 30
         self.mp = 0
-        self.status_effects = {'poisonous': player.hp -= 5}
+        self.status_effects = {'poisonous':player.hp -= 5}
         self.location = 'c2'
         self.attack = 5
         self.defense = 5
@@ -15,7 +15,7 @@ class goblin:
         self.name = 'Angry Goblin'
         self.hp = 70
         self.mp = 0
-        self.status_effects = {'enrange': goblin.attack += 3}
+        self.status_effects = {'stun':}
         self.location = 'a4'
         self.attack = 15
         self.defense = 15
@@ -27,7 +27,7 @@ class witch:
         self.name = 'Evil Witch'
         self.hp = 140
         self.mp = 80
-        self.status_effects = {'curse':player.hp -= 10}
+        self.status_effects = {'curse':player.hp -= 15}
         self.location = 'a4'
         self.attack = 5
         self.magic_attack = 15

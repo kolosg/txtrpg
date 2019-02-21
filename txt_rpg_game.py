@@ -4,8 +4,9 @@ import sys
 import time
 import textwrap
 import random
-import os 
+import os
 import cmd
+
 
 screen_width = 100
 
@@ -72,11 +73,13 @@ UP = "up", "north"
 DOWN = "down", "south"
 LEFT = "left", "west"
 RIGHT = "right", "east"
+ITEMS = "items"
+
 
 solved_places = {
-                    "a1": False, "spider nest": False, "a3": False, "a4": False, 
-                    "b1": False, "cave entrance": False, "b3": False, "b4": False, 
-                    "c1": False, "c2": False, "c3": False, "c4": False, 
+                    "a1": False, "spider nest": False, "a3": False, "a4": False,
+                    "b1": False, "cave entrance": False, "b3": False, "b4": False,
+                    "c1": False, "c2": False, "c3": False, "c4": False,
                     "d1": False, "d2": False, "d3": False, "d4": False, }
 
 zone_map = {"a1": {
@@ -125,9 +128,10 @@ zone_map = {"a1": {
                     RIGHT: "cave entrance"
                     },
             "cave entrance": {
-                    DESCRIPTION: "You find yourself in a dark cave.\nThe only source of light is a 'torch' on the wall next to you.\nMaybe should 'examine' it\nTry 'examine torch'.\n",
+                    DESCRIPTION: "You find yourself in a dark cave.\nThe only source of light is a 'torch' on the wall next to you.\nMaybe should 'examine' it\n",
                     LOOK: "examine",
                     SOLVED: False,
+                    ITEMS: "rocktorch",
                     UP: "spider nest",
                     DOWN: "c2",
                     LEFT: "b1",
@@ -230,11 +234,11 @@ def print_location():
     for character in zone_map[myPlayer.location][DESCRIPTION]:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.05)
+        time.sleep(0.01)
+
 
 
 def prompt():
-    print_location()
     print("\n" + "==========================")
     print("What would you like to do?")
     action = input("->")
@@ -247,17 +251,21 @@ def prompt():
     elif action.lower() in ["move", "go", "travel" "walk", "run"]:
         player_move(action.lower())
     elif action.lower() in ["examine", "inspect", "interact"]:
-        player_examin(action.lower())
-    elif action.lower() is "look":
-        player_look()
+        player_examine(action.lower())
+    elif action.lower() in ["look"]:
+        player_look(action.lower())
 
 
-def player_look():
-    print(zone_map[myPlayer.location][LOOK])
-    prompt() 
-    
+def player_look(action):
+    if zone_map[myPlayer.location][SOLVED] is True:
+        print("You have already exhausted this zone.")
+    else:
+        print(zone_map[myPlayer.location][LOOK])
+        print("You can still do something here.")
+    prompt()
 
-def player_move(myAction):
+
+def player_move(action):
     ask = "Where would you like to move to?\n"
     dest = input(ask)
     if dest in ["up", "north"]:
@@ -272,7 +280,7 @@ def player_move(myAction):
     elif dest in ["right", "east"]:
         destination = zone_map[myPlayer.location][RIGHT]
         movement_handler(destination)
-    
+
 
 def movement_handler(destination):
     print("\n" + "You have moved to the " + destination + ".")
@@ -281,10 +289,26 @@ def movement_handler(destination):
 
 
 def player_examine(action):
-    if zone_map[myPlayer.location][SOLVED]:
-        print("You have already exhausted this zone.")
+    examine_question = "What would you like to examine?\n"
+    answer = input(examine_question)
+    item_list = []
+    if answer.lower() in zone_map[myPlayer.location][ITEMS]:
+        with open("items.txt", "r") as item:
+            for line in item:
+                if answer in line:
+                    item_list.append(line.split(','))
+        zone_map[myPlayer.location][ITEMS] = zone_map[myPlayer.location][ITEMS].replace(answer, "")
+        for character in item_list[0][1]:
+            sys.stdout.write(character)
+            sys.stdout.flush()
+            time.sleep(0.05)
+        prompt()
     else:
-        print("You can do something here.")
+        print("There is no such thing here...")
+        prompt()
+    if zone_map[myPlayer.location][ITEMS] == "":
+        zone_map[myPlayer.location][SOLVED] = True
+        print("You solved everything in this room. Go ahead!")
 
 
 def main_game_loop():
@@ -379,6 +403,7 @@ def setup_game():
     print('###############')
     time.sleep(1)
     os.system('clear')
+    print_location()
     main_game_loop()
 
 
