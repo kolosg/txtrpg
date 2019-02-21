@@ -22,7 +22,7 @@ class player:
         self.defense = 0
         self.armor = 0
         self.luck = 0
-        self.backpack = []
+        self.backpack = {}
         self.location = 'cave entrance'
         self.game_over = False
 
@@ -69,6 +69,7 @@ def help_screen():
 DESCRIPTION = "description"
 LOOK = "examine"
 SOLVED = False
+DONE = "done"
 UP = "up", "north"
 DOWN = "down", "south"
 LEFT = "left", "west"
@@ -86,6 +87,7 @@ zone_map = {"a1": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
+                    DONE : "done",
                     UP: "",
                     DOWN: "b1",
                     LEFT: "",
@@ -95,6 +97,7 @@ zone_map = {"a1": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
+                    DONE : "done",
                     UP: "",
                     DOWN: "cave entrance",
                     LEFT: "a1",
@@ -104,6 +107,7 @@ zone_map = {"a1": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
+                    DONE : "done",
                     UP: "",
                     DOWN: "b3",
                     LEFT: "spider nest",
@@ -113,6 +117,7 @@ zone_map = {"a1": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
+                    DONE : "done",
                     UP: "",
                     DOWN: "b4",
                     LEFT: "a3",
@@ -122,6 +127,7 @@ zone_map = {"a1": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
+                    DONE : "done",
                     UP: "a1",
                     DOWN: "c1",
                     LEFT: "",
@@ -129,8 +135,9 @@ zone_map = {"a1": {
                     },
             "cave entrance": {
                     DESCRIPTION: "You find yourself in a dark cave.\nThe only source of light is a 'torch' on the wall next to you.\nMaybe should 'examine' it.\n",
-                    LOOK: "You see 'rock' in the corner with a carved opening\nIt looks suspicious.\nThere are also four openings to the north, south, east and west.",
+                    LOOK: "You see 'rock' in the corner with a carved opening.\nIt looks suspicious.\nThere are also four openings to the north, south, east and west.\n",
                     SOLVED: False,
+                    DONE: "You have already collected everything in this cave.\nYou can go ahead to north, south, west, east.\n",
                     ITEMS: "rocktorch",
                     UP: "spider nest",
                     DOWN: "c2",
@@ -141,6 +148,7 @@ zone_map = {"a1": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
+                    DONE : "done",
                     UP: "a3",
                     DOWN: "c3",
                     LEFT: "cave entrance",
@@ -150,6 +158,7 @@ zone_map = {"a1": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
+                    DONE : "done",
                     UP: "a4",
                     DOWN: "c4",
                     LEFT: "b3",
@@ -159,6 +168,7 @@ zone_map = {"a1": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
+                    DONE : "done",
                     UP: "b1",
                     DOWN: "d1",
                     LEFT: "",
@@ -168,6 +178,7 @@ zone_map = {"a1": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
+                    DONE : "done",
                     UP: "cave entrance",
                     DOWN: "d2",
                     LEFT: "c1",
@@ -177,6 +188,7 @@ zone_map = {"a1": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
+                    DONE : "done",
                     UP: "b3",
                     DOWN: "d3",
                     LEFT: "c2",
@@ -186,6 +198,7 @@ zone_map = {"a1": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
+                    DONE : "done",
                     UP: "b4",
                     DOWN: "d4",
                     LEFT: "c3",
@@ -195,6 +208,7 @@ zone_map = {"a1": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
+                    DONE : "done",
                     UP: "c1",
                     DOWN: "",
                     LEFT: "",
@@ -204,6 +218,7 @@ zone_map = {"a1": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
+                    DONE : "done",
                     UP: "c2",
                     DOWN: "",
                     LEFT: "d1",
@@ -213,6 +228,7 @@ zone_map = {"a1": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
+                    DONE : "done",
                     UP: "c3",
                     DOWN: "",
                     LEFT: "d2",
@@ -222,6 +238,7 @@ zone_map = {"a1": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
+                    DONE : "done",
                     UP: "c4",
                     DOWN: "",
                     LEFT: "d3",
@@ -230,14 +247,18 @@ zone_map = {"a1": {
 
 
 def print_location():
-    if zone_map[myPlayer.location][SOLVED] == False: 
+    if solved_places[myPlayer.location] == False: 
         print("# " + myPlayer.location.upper() + " #\n")
         for character in zone_map[myPlayer.location][DESCRIPTION]:
             sys.stdout.write(character)
             sys.stdout.flush()
             time.sleep(0.01)
     else:
-        print("You have already exhausted this zone.")
+        print("# " + myPlayer.location.upper() + " #\n")
+        for character in zone_map[myPlayer.location][DONE]:
+            sys.stdout.write(character)
+            sys.stdout.flush()
+            time.sleep(0.01)
         prompt()
 
 
@@ -260,13 +281,16 @@ def prompt():
 
 
 def player_look(action):
-    if zone_map[myPlayer.location][SOLVED] == True:
-        print("You have already exhausted this zone.")
-    elif zone_map[myPlayer.location][SOLVED] == False:
+    if solved_places[myPlayer.location] == True:
+        for character in zone_map[myPlayer.location][DONE]:
+            sys.stdout.write(character)
+            sys.stdout.flush()
+            time.sleep(0.01)
+    else:
         for character in zone_map[myPlayer.location][LOOK]:
             sys.stdout.write(character)
             sys.stdout.flush()
-            time.sleep(0.05)
+            time.sleep(0.01)
     prompt()
 
 
@@ -288,7 +312,7 @@ def player_move(action):
 
 
 def movement_handler(destination):
-    print("\n" + "You have moved to the " + destination + ".")
+    os.system('clear')
     myPlayer.location = destination
     print_location()
 
@@ -303,17 +327,27 @@ def player_examine(action):
                 if answer in line:
                     item_list.append(line.split(','))
         zone_map[myPlayer.location][ITEMS] = zone_map[myPlayer.location][ITEMS].replace(answer, "")
+        if len(item_list[0]) == 3:
+            if item_list[0][2][:-1] not in myPlayer.backpack:
+                myPlayer.backpack[item_list[0][2][:-1]] = 1
+        elif len(item_list[0]) == 4:
+            if item_list[0][2] not in myPlayer.backpack:
+                myPlayer.backpack[item_list[0][2]] = int(item_list[0][3][:-1])
+            else:
+                myPlayer.backpack[item_list[0][2]] += int(item_list[0][3][:-1])
+        print(myPlayer.backpack)
         for character in item_list[0][1]:
             sys.stdout.write(character)
             sys.stdout.flush()
-            time.sleep(0.05)
+            time.sleep(0.01)
+        if zone_map[myPlayer.location][ITEMS] == "":
+            solved_places[myPlayer.location] = True
+            print("")
+            print("You solved everything in this room. Go ahead!")
         prompt()
     else:
         print("There is no such thing here...")
         prompt()
-    if zone_map[myPlayer.location][ITEMS] == "":
-        zone_map[myPlayer.location][SOLVED] = True
-        print("You solved everything in this room. Go ahead!")
 
 
 def main_game_loop():
@@ -327,7 +361,7 @@ def setup_game():
     for character in question1:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.05)
+        time.sleep(0.01)
     player_name = input('->')
     myPlayer.name = player_name
 
@@ -336,7 +370,7 @@ def setup_game():
     for character in question2:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.05)
+        time.sleep(0.01)
     for character in question2added:
         sys.stdout.write(character)
         sys.stdout.flush()
@@ -378,7 +412,7 @@ def setup_game():
     for character in question3:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.05)
+        time.sleep(0.01)
 
     speech1 = 'Hello\n'
     speech2 = 'Welcome\n'
@@ -388,19 +422,19 @@ def setup_game():
     for character in speech1:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.05)
+        time.sleep(0.01)
     for character in speech2:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.05)
+        time.sleep(0.01)
     for character in speech3:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.05)
+        time.sleep(0.01)
     for character in speech4:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.05)
+        time.sleep(0.01)
 
     os.system('clear')
     print('###############')
