@@ -2,32 +2,17 @@
 
 import sys
 import time
-import textwrap
 import random
 import os
-import cmd
-
+import classes
 
 screen_width = 100
 
-
-class player:
-    def __init__(self):
-        self.name = ''
-        self.hp = 0
-        self.mp = 0
-        self.status_effects = []
-        self.attack = 0
-        self.magic_attack = 0
-        self.defense = 0
-        self.armor = 0
-        self.luck = 0
-        self.backpack = {}
-        self.location = 'cave entrance'
-        self.game_over = False
-
-
-myPlayer = player()
+spider = classes.spider()
+myPlayer = classes.player()
+goblin = classes.goblin()
+witch = classes.witch()
+boss = classes.boss()
 
 
 def first_screen_options():
@@ -77,121 +62,122 @@ ITEMS = "items"
 
 
 solved_places = {
-                    "a1": False, "spider nest": False, "a3": False, "a4": False,
-                    "b1": False, "cave entrance": False, "b3": False, "b4": False,
+                    "a1": False, "Spider nest": False, "a3": False, "a4": False,
+                    "b1": False, "Cave entrance": False, "b3": False, "b4": False,
                     "c1": False, "c2": False, "c3": False, "c4": False,
                     "d1": False, "d2": False, "d3": False, "d4": False, }
 
-zone_map = {"treasure room": {
+
+zone_map = {"Treasure room": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     UP: "",
-                    DOWN: "alchemist's lab",
+                    DOWN: "Alchemist's lab",
                     LEFT: "",
-                    RIGHT: "spider nest"
+                    RIGHT: "Spider nest"
                     },
-            "spider nest": {
+            "Spider nest": {
+                    DESCRIPTION: "You enter an ominous cavern. You see huge spider webs all around you...\n",
+                    LOOK: "Not far from you realize there is disgusting spider lurking in the shadows.\n",
+                    SOLVED: False,
+                    DONE : "done",
+                    ITEMS: "",
+                    UP: "",
+                    DOWN: "Cave entrance",
+                    LEFT: "Treasure room",
+                    RIGHT: "Hall of runes"
+                    },
+            "Hall of runes": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
                     UP: "",
-                    DOWN: "cave entrance",
-                    LEFT: "treasure room",
-                    RIGHT: "hall of runes"
+                    DOWN: "Cavern swamp",
+                    LEFT: "Spider nest",
+                    RIGHT: "Salacite cavern"
                     },
-            "hall of runes": {
+            "Salacite cavern": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
                     UP: "",
-                    DOWN: "cavern swamp",
-                    LEFT: "spider nest",
-                    RIGHT: "salacite cavern"
-                    },
-            "salacite cavern": {
-                    DESCRIPTION: "description",
-                    LOOK: "examine",
-                    SOLVED: False,
-                    DONE : "done",
-                    ITEMS: "",
-                    UP: "",
-                    DOWN: "grave",
-                    LEFT: "hall of runes",
+                    DOWN: "Grave",
+                    LEFT: "Hall of runes",
                     RIGHT: ""
                     },
-            "alchemist's lab": {
+            "Alchemist's lab": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "treasure room",
-                    DOWN: "lost man's hide",
+                    UP: "Treasure room",
+                    DOWN: "Lost man's hide",
                     LEFT: "",
-                    RIGHT: "cave entrance"
+                    RIGHT: "Cave entrance"
                     },
-            "cave entrance": {
+            "Cave entrance": {
                     DESCRIPTION: "You find yourself in a dark cave.\nThe only source of light is a 'torch' on the wall next to you.\nMaybe should 'examine' it.\n",
                     LOOK: "You see 'rock' in the corner with a carved opening.\nIt looks suspicious.\nThere are also four openings to the north, south, east and west.\n",
                     SOLVED: False,
                     DONE: "You have already collected everything in this cave.\nYou can go ahead to north, south, west, east.\n",
                     ITEMS: "rocktorch",
-                    UP: "spider nest",
-                    DOWN: "room of altar",
-                    LEFT: "alchemist's lab",
-                    RIGHT: "cavern swamp"
+                    UP: "Spider nest",
+                    DOWN: "Room of altar",
+                    LEFT: "Alchemist's lab",
+                    RIGHT: "Cavern swamp"
                     },
-            "cavern swamp": {
+            "Cavern swamp": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "hall of runes",
-                    DOWN: "mirrors cavern",
-                    LEFT: "cave entrance",
-                    RIGHT: "grave"
+                    UP: "Hall of runes",
+                    DOWN: "Mirrors cavern",
+                    LEFT: "Cave entrance",
+                    RIGHT: "Grave"
                     },
-            "grave": {
+            "Grave": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "salacite cavern",
-                    DOWN: "gobling's cavern",
-                    LEFT: "cavern swamp",
+                    UP: "Salacite cavern",
+                    DOWN: "Goblin's cavern",
+                    LEFT: "Cavern swamp",
                     RIGHT: ""
                     },
-            "lost man's hide": {
+            "Lost man's hide": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "alchemist lab",
-                    DOWN: "christall cavern",
+                    UP: "Alchemist's lab",
+                    DOWN: "Christall cavern",
                     LEFT: "",
-                    RIGHT: "room of altar"
+                    RIGHT: "Room of altar"
                     },
-            "room of altar": {
+            "Room of altar": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "cave entrance",
-                    DOWN: "haunted cavern",
-                    LEFT: "lost man's hide",
-                    RIGHT: "mirrors cavern"
+                    UP: "Cave entrance",
+                    DOWN: "Haunted cavern",
+                    LEFT: "Lost man's hide",
+                    RIGHT: "Mirrors cavern"
                     },
-            "mirrors cavern": {
+            "Mirrors cavern": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
@@ -202,62 +188,61 @@ zone_map = {"treasure room": {
                     LEFT: "c2",
                     RIGHT: "c4"
                     },
-            "goblin's cavern": {
+            "Goblin's cavern": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "grave",
-                    DOWN: "smuggler's hide",
-                    LEFT: "mirrors cavern",
+                    UP: "Grave",
+                    DOWN: "Smuggler's hide",
+                    LEFT: "Mirrors cavern",
                     RIGHT: ""
                     },
-            "christall cavern": {
+            "Christall cavern": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "lost man's hide",
+                    UP: "Lost man's hide",
                     DOWN: "",
                     LEFT: "",
-                    RIGHT: "haunted cavern"
+                    RIGHT: "Haunted cavern"
                     },
-            "haunted cavern": {
+            "Haunted cavern": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "room of altar",
+                    UP: "Room of altar",
                     DOWN: "",
-                    LEFT: "christall cavern",
-                    RIGHT: "hide-out"
+                    LEFT: "Christall cavern",
+                    RIGHT: "Hide-out"
                     },
-            "hide-out": {
+            "Hide-out": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "mirrors cavern",
+                    UP: "Mirrors cavern",
                     DOWN: "",
-                    LEFT: "haunted cavern",
-                    RIGHT: "smuggler's hide"
+                    LEFT: "Haunted cavern",
+                    RIGHT: "Smuggler's hide"
                     },
-            "smuggler's hide": {
+            "Smuggler's hide": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "goblin's cavern",
+                    UP: "Goblin's cavern",
                     DOWN: "",
-                    LEFT: "hide-out",
+                    LEFT: "Hide-out",
                     RIGHT: ""
                     }}
-
 
 
 def print_location():
@@ -292,6 +277,8 @@ def prompt():
         player_examine(action.lower())
     elif action.lower() in ["look"]:
         player_look(action.lower())
+    elif action.lower() in ["attack"]:
+        player_attack(action.lower())
     elif action.lower() in ["status"]:
         status()
         zones()
@@ -355,6 +342,14 @@ def player_move(action):
         destination = zone_map[myPlayer.location][RIGHT]
         movement_handler(destination)
 
+"""def opponent():
+    if myPlayer.location == "Spider nest":
+        print("you are here")
+        opponent = spider()
+        return opponent
+    else:
+        pass
+"""
 
 def movement_handler(destination):
     os.system('clear')
@@ -432,21 +427,23 @@ def setup_game():
             myPlayer.job = player_job
             print('You are now a ' + player_job + '!\n')
     if myPlayer.job in ['warrior']:
-        myPlayer.hp = 140
+        myPlayer.hp = 340
         myPlayer.mp = 20
         myPlayer.attack = 10
+        myPlayer.original_attack = 10
         myPlayer.magic_attack = 1
         myPlayer.defense = 19
+        myPlayer.original_defense = 19
         myPlayer.armor = 0
     if myPlayer.job in ["mage"]:
-        myPlayer.hp = 40
+        myPlayer.hp = 240
         myPlayer.mp = 120
         myPlayer.attack = 4
         myPlayer.magic_attack = 18
         myPlayer.defense = 8
         myPlayer.armor = 0
     if myPlayer.job in ['priest']:
-        myPlayer.hp = 80
+        myPlayer.hp = 280
         myPlayer.mp = 80
         myPlayer.attack = 10
         myPlayer.magic_attack = 10
@@ -459,7 +456,7 @@ def setup_game():
         sys.stdout.flush()
         time.sleep(0.01)
 
-    speech1 = 'You have finally finished your training in the ' + player_job + ' clan\n'
+    """speech1 = 'You have finally finished your training in the ' + player_job + ' clan\n'
     speech2 = 'The head of the ' + player_job + ' clan gives you, a special mission.\n'
     speech3 = 'He tells you that a member of the Clan has become a betrayer and he stole the Golden Idol of the Clan\n'
     speech4 = 'Your mission will be to find the traitor and bring back the Golden Idol! Your master tells you where to look for the traitor..\n'
@@ -484,7 +481,7 @@ def setup_game():
     for character in speech5:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.01)
+        time.sleep(0.01)"""
 
     time.sleep(1)
     os.system('clear')
@@ -492,12 +489,67 @@ def setup_game():
     main_game_loop()
 
 
-def roll_dice():
+"""def roll_dice():
+    dices = []
     player_dice = random.randint(1, 100)
-    print('You rolled ' + player_dice)
+    print('You rolled ' + str(player_dice))
+    dices.append(player_dice)
     enemy_dice = random.randint(1, 100)
-    print('Your enemy has rolled ' + enemy_dice)
+    print('Your enemy has rolled ' + str(enemy_dice))
+    dices.append(enemy_dice)
+    return dices"""
 
 
-second_screen()
-first_screen_options()
+def player_attack(action):
+    if myPlayer.location == "Spider nest":
+        if myPlayer.hp > 0 and spider.hp > 0:
+            print("")
+            player_dice = random.randint(1, 100)
+            print('You rolled ' + str(player_dice))
+            opponent_dice = random.randint(1, 100)
+            print('Your enemy has rolled ' + str(opponent_dice) + "\n")
+            myPlayer.attack += player_dice
+            spider.defense += opponent_dice
+            difference = myPlayer.attack - spider.defense
+            if difference > 0:
+                spider.hp -= difference
+                print(str(spider.name) + " lost " + str(difference) + ' health. ' + str(spider.name) + "'s hp is: " + str(spider.hp))
+                print(str(myPlayer.name) + "'s hp is: " + str(myPlayer.hp) + "\n")
+            else:
+                print(str(spider.name) + " defended!")
+            myPlayer.attack = myPlayer.original_attack
+            spider.defense = spider.original_defense
+            player_dice = random.randint(1, 100)
+            print('You rolled ' + str(player_dice))
+            opponent_dice = random.randint(1, 100)
+            print('Your enemy has rolled ' + str(opponent_dice) + "\n")
+            myPlayer.defense += player_dice
+            spider.attack += opponent_dice
+            difference = spider.attack - myPlayer.defense
+            if difference > 0:
+                myPlayer.hp -= difference
+                print(str(myPlayer.name) + " lost " + str(difference) + ' health. ' + str(myPlayer.name) + "'s hp is: " + str(myPlayer.hp))
+                print(str(spider.name) + "'s hp is: " + str(spider.hp) + "\n")
+            else:
+                print(str(myPlayer.name) + " defended!\n")
+            myPlayer.defense = myPlayer.original_defense
+            spider.attack = spider.original_attack
+            if spider.hp < 0:
+                print(str(spider.name) + " is defeated!")
+            elif myPlayer.hp < 0:
+                print("You are defeated")
+        else:
+            print("There is nothing to attack")
+        prompt()
+    
+
+    
+    
+
+
+def main():
+    second_screen()
+    first_screen_options()
+
+if __name__ == "__main__":
+    main()
