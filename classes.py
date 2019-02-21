@@ -12,7 +12,7 @@ class player:
         self.armor = 0
         self.luck = 0
         self.backpack = {}
-        self.location = "Cave Entrance"
+        self.location = "Room of Altar"
         self.game_over = False
 
 

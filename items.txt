@@ -1,2 +1,4 @@
 torch,You have a torch. Now you can see. Maybe you should "look" around...,torch
 rock,You have map now. Check your status to see where you are. Hopefully you won't get lost now...HaHaHaaa,map
+altar,You feel like praying here. As you knee down in front of it a beautifal beam of light shines on you...And you see something carved at the bottom of it...You read it.,fragments,2HS
+

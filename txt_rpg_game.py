@@ -67,6 +67,7 @@ solved_places = {
                     "Lost Man's Hide": False, "Room of Altar": False, "Cavern of Mirrors": False, "Goblin's Hollow": False,
                     "Crystal Cavern": False, "Haunted Cavern": False, "Hide-out": False, "Smuggler's Hide": False, }
 
+
 visited_places = {
                     "Treasure Room": False, "Spider's Nest": False, "Hall of Runes": False, "Stalactite Cavern": False,
                     "Alchemist's Lab": False, "Cave Entrance": True, "Cavern Swamp": False, "Graveyard": False,
@@ -173,11 +174,11 @@ zone_map = {"Treasure Room": {
                     RIGHT: "Room of Altar"
                     },
             "Room of Altar": {
-                    DESCRIPTION: "This place looks like premise of a temple from ancient times.\n",
+                    DESCRIPTION: "This place looks like a premise of a temple from ancient times.\n",
                     LOOK: "You realize that a small altar is in the middle of this place.\n",
                     SOLVED: False,
                     DONE : "done",
-                    ITEMS: "",
+                    ITEMS: "altar",
                     UP: "Cave Entrance",
                     DOWN: "Haunted Cavern",
                     LEFT: "Lost Man's Hide",
@@ -221,7 +222,7 @@ zone_map = {"Treasure Room": {
                     LOOK: "You see a shape of a person... But as you get closer his body looks transparent...\nIt's a ghost!\n ",
                     SOLVED: False,
                     DONE : "done",
-                    ITEMS: "",
+                    ITEMS: "ghost",
                     UP: "Room of Altar",
                     DOWN: "",
                     LEFT: "Crystal Cavern",
@@ -496,14 +497,6 @@ def player_move(action):
         else:
             print("You don't want to hit the wall")
 
-"""def opponent():
-    if myPlayer.location == "Spider's Nest":
-        print("you are here")
-        opponent = spider()
-        return opponent
-    else:
-        pass
-"""
 
 def movement_handler(destination):
     os.system('clear')
@@ -527,9 +520,15 @@ def player_examine(action):
                 myPlayer.backpack[item_list[0][2][:-1]] = 1
         elif len(item_list[0]) == 4:
             if item_list[0][2] not in myPlayer.backpack:
-                myPlayer.backpack[item_list[0][2]] = int(item_list[0][3][:-1])
+                try:
+                    myPlayer.backpack[item_list[0][2]] = int(item_list[0][3][:-1])
+                except:
+                    myPlayer.backpack[item_list[0][2]] = item_list[0][3][:-1]
             else:
-                myPlayer.backpack[item_list[0][2]] += int(item_list[0][3][:-1])
+                try:
+                    myPlayer.backpack[item_list[0][2]] += int(item_list[0][3][:-1])
+                except:
+                    myPlayer.backpack[item_list[0][2]] += item_list[0][3][:-1]
         print(myPlayer.backpack)
         for character in item_list[0][1]:
             sys.stdout.write(character)
@@ -644,17 +643,6 @@ def setup_game():
     main_game_loop()
 
 
-"""def roll_dice():
-    dices = []
-    player_dice = random.randint(1, 100)
-    print('You rolled ' + str(player_dice))
-    dices.append(player_dice)
-    enemy_dice = random.randint(1, 100)
-    print('Your enemy has rolled ' + str(enemy_dice))
-    dices.append(enemy_dice)
-    return dices"""
-
-
 def player_attack(action):
     if myPlayer.location == "Spider's Nest":
         if myPlayer.hp > 0 and spider.hp > 0:
@@ -700,7 +688,6 @@ def player_attack(action):
 
 def main():
     second_screen()
-    first_screen_options()
 
 
 if __name__ == "__main__":
