@@ -23,7 +23,7 @@ class player:
         self.armor = 0
         self.luck = 0
         self.backpack = {}
-        self.location = 'cave entrance'
+        self.location = 'Cave entrance'
         self.game_over = False
 
 
@@ -51,6 +51,17 @@ def first_screen_options():
 
 def second_screen():
     os.system('clear')
+    counter = 0
+    for item in zone:
+        if len(item) > counter:
+            counter = len(item)
+
+    for item in zone:
+        if len(item) == counter:
+            print(counter)
+            print(item)
+    print(zone)
+
     print(' Welcome! ')
     print(' - Play - ')
     print(' - Help - ')
@@ -77,121 +88,128 @@ ITEMS = "items"
 
 
 solved_places = {
-                    "a1": False, "spider nest": False, "a3": False, "a4": False,
-                    "b1": False, "cave entrance": False, "b3": False, "b4": False,
-                    "c1": False, "c2": False, "c3": False, "c4": False,
-                    "d1": False, "d2": False, "d3": False, "d4": False, }
+                    "Treasure room": False, "Spider nest": False, "Hall of runes": False, "Salacite cavern": False,
+                    "Alchemist's lab": False, "Cave entrance": False, "Cavern swamp": False, "Grave": False,
+                    "Lost man's hide": False, "Room of altar": False, "Mirrors cavern": False, "Goblin's cavern": False,
+                    "Christall cavern": False, "Haunted cavern": False, "Hide-out": False, "Smuggler's hide": False, }
 
-zone_map = {"treasure room": {
+visited_places = {
+                    "Treasure room": False, "Spider nest": False, "Hall of runes": False, "Salacite cavern": False,
+                    "Alchemist's lab": False, "Cave entrance": False, "Cavern swamp": False, "Grave": False,
+                    "Lost man's hide": False, "Room of altar": False, "Mirrors cavern": False, "Goblin's cavern": False,
+                    "Christall cavern": False, "Haunted cavern": False, "Hide-out": False, "Smuggler's hide": False, }
+
+
+zone_map = {"Treasure room": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     UP: "",
-                    DOWN: "alchemist's lab",
+                    DOWN: "Alchemist's lab",
                     LEFT: "",
-                    RIGHT: "spider nest"
+                    RIGHT: "Spider nest"
                     },
-            "spider nest": {
+            "Spider nest": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
                     UP: "",
-                    DOWN: "cave entrance",
-                    LEFT: "treasure room",
-                    RIGHT: "hall of runes"
+                    DOWN: "Cave entrance",
+                    LEFT: "Treasure room",
+                    RIGHT: "Hall of runes"
                     },
-            "hall of runes": {
+            "Hall of runes": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
                     UP: "",
-                    DOWN: "cavern swamp",
-                    LEFT: "spider nest",
-                    RIGHT: "salacite cavern"
+                    DOWN: "Cavern swamp",
+                    LEFT: "Spider nest",
+                    RIGHT: "Salacite cavern"
                     },
-            "salacite cavern": {
+            "Salacite cavern": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
                     UP: "",
-                    DOWN: "grave",
-                    LEFT: "hall of runes",
+                    DOWN: "Grave",
+                    LEFT: "Hall of runes",
                     RIGHT: ""
                     },
-            "alchemist's lab": {
+            "Alchemist's lab": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "treasure room",
-                    DOWN: "lost man's hide",
+                    UP: "Treasure room",
+                    DOWN: "Lost man's hide",
                     LEFT: "",
-                    RIGHT: "cave entrance"
+                    RIGHT: "Cave entrance"
                     },
-            "cave entrance": {
+            "Cave entrance": {
                     DESCRIPTION: "You find yourself in a dark cave.\nThe only source of light is a 'torch' on the wall next to you.\nMaybe should 'examine' it.\n",
                     LOOK: "You see 'rock' in the corner with a carved opening.\nIt looks suspicious.\nThere are also four openings to the north, south, east and west.\n",
                     SOLVED: False,
                     DONE: "You have already collected everything in this cave.\nYou can go ahead to north, south, west, east.\n",
                     ITEMS: "rocktorch",
-                    UP: "spider nest",
-                    DOWN: "room of altar",
-                    LEFT: "alchemist's lab",
-                    RIGHT: "cavern swamp"
+                    UP: "Spider nest",
+                    DOWN: "Room of altar",
+                    LEFT: "Alchemist's lab",
+                    RIGHT: "Cavern swamp"
                     },
-            "cavern swamp": {
+            "Cavern swamp": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "hall of runes",
-                    DOWN: "mirrors cavern",
-                    LEFT: "cave entrance",
-                    RIGHT: "grave"
+                    UP: "Hall of runes",
+                    DOWN: "Mirrors cavern",
+                    LEFT: "Cave entrance",
+                    RIGHT: "Grave"
                     },
-            "grave": {
+            "Grave": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "salacite cavern",
+                    UP: "Salacite cavern",
                     DOWN: "gobling's cavern",
-                    LEFT: "cavern swamp",
+                    LEFT: "Cavern swamp",
                     RIGHT: ""
                     },
-            "lost man's hide": {
+            "Lost man's hide": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
                     UP: "alchemist lab",
-                    DOWN: "christall cavern",
+                    DOWN: "Christall cavern",
                     LEFT: "",
-                    RIGHT: "room of altar"
+                    RIGHT: "Room of altar"
                     },
-            "room of altar": {
+            "Room of altar": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "cave entrance",
-                    DOWN: "haunted cavern",
-                    LEFT: "lost man's hide",
-                    RIGHT: "mirrors cavern"
+                    UP: "Cave entrance",
+                    DOWN: "Haunted cavern",
+                    LEFT: "Lost man's hide",
+                    RIGHT: "Mirrors cavern"
                     },
-            "mirrors cavern": {
+            "Mirrors cavern": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
@@ -202,61 +220,65 @@ zone_map = {"treasure room": {
                     LEFT: "c2",
                     RIGHT: "c4"
                     },
-            "goblin's cavern": {
+            "Goblin's cavern": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "grave",
-                    DOWN: "smuggler's hide",
-                    LEFT: "mirrors cavern",
+                    UP: "Grave",
+                    DOWN: "Smuggler's hide",
+                    LEFT: "Mirrors cavern",
                     RIGHT: ""
                     },
-            "christall cavern": {
+            "Christall cavern": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "lost man's hide",
+                    UP: "Lost man's hide",
                     DOWN: "",
                     LEFT: "",
-                    RIGHT: "haunted cavern"
+                    RIGHT: "Haunted cavern"
                     },
-            "haunted cavern": {
+            "Haunted cavern": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "room of altar",
+                    UP: "Room of altar",
                     DOWN: "",
-                    LEFT: "christall cavern",
-                    RIGHT: "hide-out"
+                    LEFT: "Christall cavern",
+                    RIGHT: "Hide-out"
                     },
-            "hide-out": {
+            "Hide-out": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "mirrors cavern",
+                    UP: "Mirrors cavern",
                     DOWN: "",
-                    LEFT: "haunted cavern",
-                    RIGHT: "smuggler's hide"
+                    LEFT: "Haunted cavern",
+                    RIGHT: "Smuggler's hide"
                     },
-            "smuggler's hide": {
+            "Smuggler's hide": {
                     DESCRIPTION: "description",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
-                    UP: "goblin's cavern",
+                    UP: "Goblin's cavern",
                     DOWN: "",
-                    LEFT: "hide-out",
+                    LEFT: "Hide-out",
                     RIGHT: ""
                     }}
+
+zone = []
+for key, value in zone_map.items():
+    zone.append(key)
 
 
 
@@ -313,7 +335,6 @@ def status():
 
 
 def zones():
-    zone = [""]
     print(" –––––––––––––––––––")
     print("| a1 | a2 | a3 | a4 |")
     print("|–––––––––––––––––––|")
