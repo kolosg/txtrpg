@@ -35,3 +35,16 @@ class witch:
         self.armor = 2
 
 
+class boss:
+    def __init__(self):
+        self.name = 'Clan traitor'
+        self.hp = 200
+        self.mp = 80
+        self.status_effects = {'icy touch': player.hp -= 15}
+        self.location = 'c3'
+        self.attack = 15
+        self.magic_attack = 20
+        self.defense = 25
+        self.armor = 5
+
+
