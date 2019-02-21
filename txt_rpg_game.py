@@ -77,14 +77,14 @@ ITEMS = "items"
 
 
 solved_places = {
-                    "a1": False, "spider nest": False, "a3": False, "a4": False,
+                    "treasure room": False, "spider nest": False, "a3": False, "a4": False,
                     "b1": False, "cave entrance": False, "b3": False, "b4": False,
                     "c1": False, "c2": False, "c3": False, "c4": False,
                     "d1": False, "d2": False, "d3": False, "d4": False, }
 
 zone_map = {"treasure room": {
-                    DESCRIPTION: "description",
-                    LOOK: "examine",
+                    DESCRIPTION: "You arrived in quickie builded wooden room.\n There's a heap in the corner of the room, covered whith some nasty rags.\n",
+                    LOOK: "There's no more interesting thing except of the misterious heap...\n",
                     SOLVED: False,
                     DONE : "done",
                     UP: "",
@@ -93,7 +93,7 @@ zone_map = {"treasure room": {
                     RIGHT: "spider nest"
                     },
             "spider nest": {
-                    DESCRIPTION: "description",
+                    DESCRIPTION: "As you",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
@@ -104,8 +104,8 @@ zone_map = {"treasure room": {
                     RIGHT: "hall of runes"
                     },
             "hall of runes": {
-                    DESCRIPTION: "description",
-                    LOOK: "examine",
+                    DESCRIPTION: "You entered a quite spacious room, where are misterious lights everywhere.\n",
+                    LOOK: "As you look around in the room, you realize that the lights are luminous runes on the wall...\n",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
@@ -115,8 +115,8 @@ zone_map = {"treasure room": {
                     RIGHT: "salacite cavern"
                     },
             "salacite cavern": {
-                    DESCRIPTION: "description",
-                    LOOK: "examine",
+                    DESCRIPTION: "This place is like a tipical cavern.\n",
+                    LOOK: "You see nothing special...\n Big salacites everywhere...\n But you suddenly realize that something was written on one.\n",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
@@ -126,8 +126,8 @@ zone_map = {"treasure room": {
                     RIGHT: ""
                     },
             "alchemist's lab": {
-                    DESCRIPTION: "description",
-                    LOOK: "examine",
+                    DESCRIPTION: "You arrive to a strange place.. It seems like a chemisty lab...\n",
+                    LOOK: "You see a table full with strage bottles and equipments on it.\n",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
@@ -148,8 +148,8 @@ zone_map = {"treasure room": {
                     RIGHT: "cavern swamp"
                     },
             "cavern swamp": {
-                    DESCRIPTION: "description",
-                    LOOK: "examine",
+                    DESCRIPTION: "As you enter this place, suddenly a disgusting smell hit your nose...\n It's like a marsh...\n",
+                    LOOK: "As you look around, you see that there's a small pound full of chrystal clear water in the marsh...\n Really strange...\n",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
@@ -159,8 +159,8 @@ zone_map = {"treasure room": {
                     RIGHT: "grave"
                     },
             "grave": {
-                    DESCRIPTION: "description",
-                    LOOK: "examine",
+                    DESCRIPTION: "You enter a dark cavern...\n Suddenly something crashing under your foot...\n",
+                    LOOK: "You see that bones and corpses everywhere in this place.\n One of them looks really strange...\n",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
@@ -170,8 +170,8 @@ zone_map = {"treasure room": {
                     RIGHT: ""
                     },
             "lost man's hide": {
-                    DESCRIPTION: "description",
-                    LOOK: "examine",
+                    DESCRIPTION: "You find yourself is a drak cavern whitch like a catacomb...",
+                    LOOK: "You see a human shape in the back of the cavern...\n As you step closer you see a matted, thin man who seems totally lost...\n",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
@@ -181,8 +181,8 @@ zone_map = {"treasure room": {
                     RIGHT: "room of altar"
                     },
             "room of altar": {
-                    DESCRIPTION: "description",
-                    LOOK: "examine",
+                    DESCRIPTION: "This place looks like permise of a temple from an ancient time.\n",
+                    LOOK: "You realize that a small altar is in the middle of this place.\n",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
@@ -192,8 +192,8 @@ zone_map = {"treasure room": {
                     RIGHT: "mirrors cavern"
                     },
             "mirrors cavern": {
-                    DESCRIPTION: "description",
-                    LOOK: "examine",
+                    DESCRIPTION: "As you enter this place, you see yourself on the walls...\n You feel confused...\n",
+                    LOOK: "It looks like all the walls are made from mirror...\n You don't even know where are you going...\n",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
@@ -203,8 +203,8 @@ zone_map = {"treasure room": {
                     RIGHT: "c4"
                     },
             "goblin's cavern": {
-                    DESCRIPTION: "description",
-                    LOOK: "examine",
+                    DESCRIPTION: "You entered a place where small used stuff everywhere... and bones too...smoething smells bad...\n",
+                    LOOK: "You see a small person in strange cloths.\n He seems angry because you entered his territory...\n",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
@@ -214,8 +214,8 @@ zone_map = {"treasure room": {
                     RIGHT: ""
                     },
             "christall cavern": {
-                    DESCRIPTION: "description",
-                    LOOK: "examine",
+                    DESCRIPTION: "This place is really strange. Colourful chrystalls everywhere..\n And stuffs... which looks like the equipment for some dark ritual...\n",
+                    LOOK: "You see a pretty woman who seems really attractive, but you feel that not everything is fine with her...\n",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
@@ -225,8 +225,8 @@ zone_map = {"treasure room": {
                     RIGHT: "haunted cavern"
                     },
             "haunted cavern": {
-                    DESCRIPTION: "description",
-                    LOOK: "examine",
+                    DESCRIPTION: "You entered a place which looks like a normal part of a cave...\n",
+                    LOOK: "You see a shape of a person... But as you get closer his body looks transparent...\n It's a ghost!\n ",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
@@ -236,7 +236,7 @@ zone_map = {"treasure room": {
                     RIGHT: "hide-out"
                     },
             "hide-out": {
-                    DESCRIPTION: "description",
+                    DESCRIPTION: "You step into place which look like a room formed to hide...\n A human's stuff everywhere...\n",
                     LOOK: "examine",
                     SOLVED: False,
                     DONE : "done",
@@ -247,8 +247,8 @@ zone_map = {"treasure room": {
                     RIGHT: "smuggler's hide"
                     },
             "smuggler's hide": {
-                    DESCRIPTION: "description",
-                    LOOK: "examine",
+                    DESCRIPTION: "This dark place looks like a storage... Every kind of stuff inside.\n",
+                    LOOK: "You see a thin man inside packing up the stuffs\n",
                     SOLVED: False,
                     DONE : "done",
                     ITEMS: "",
