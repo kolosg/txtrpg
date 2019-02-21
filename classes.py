@@ -5,12 +5,14 @@ class player:
         self.mp = 0
         self.status_effects = []
         self.attack = 0
+        self.original_attack = 0
         self.magic_attack = 0
         self.defense = 0
+        self.original_defense = 0
         self.armor = 0
         self.luck = 0
         self.backpack = {}
-        self.location = 'spider nest'
+        self.location = "Cave Entrance"
         self.game_over = False
 
 
