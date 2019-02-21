@@ -128,8 +128,8 @@ zone_map = {"a1": {
                     RIGHT: "cave entrance"
                     },
             "cave entrance": {
-                    DESCRIPTION: "You find yourself in a dark cave.\nThe only source of light is a 'torch' on the wall next to you.\nMaybe should 'examine' it\n",
-                    LOOK: "examine",
+                    DESCRIPTION: "You find yourself in a dark cave.\nThe only source of light is a 'torch' on the wall next to you.\nMaybe should 'examine' it.\n",
+                    LOOK: "You see 'rock' in the corner with a carved opening\nIt looks suspicious.\nThere are also four openings to the north, south, east and west.",
                     SOLVED: False,
                     ITEMS: "rocktorch",
                     UP: "spider nest",
@@ -230,11 +230,16 @@ zone_map = {"a1": {
 
 
 def print_location():
-    print("# " + myPlayer.location.upper() + " #\n")
-    for character in zone_map[myPlayer.location][DESCRIPTION]:
-        sys.stdout.write(character)
-        sys.stdout.flush()
-        time.sleep(0.01)
+    if zone_map[myPlayer.location][SOLVED] == False: 
+        print("# " + myPlayer.location.upper() + " #\n")
+        for character in zone_map[myPlayer.location][DESCRIPTION]:
+            sys.stdout.write(character)
+            sys.stdout.flush()
+            time.sleep(0.01)
+    else:
+        print("You have already exhausted this zone.")
+        prompt()
+
 
 
 def prompt():
@@ -256,11 +261,13 @@ def prompt():
 
 
 def player_look(action):
-    if zone_map[myPlayer.location][SOLVED] is True:
+    if zone_map[myPlayer.location][SOLVED] == True:
         print("You have already exhausted this zone.")
-    else:
-        print(zone_map[myPlayer.location][LOOK])
-        print("You can still do something here.")
+    elif zone_map[myPlayer.location][SOLVED] == False:
+        for character in zone_map[myPlayer.location][LOOK]:
+            sys.stdout.write(character)
+            sys.stdout.flush()
+            time.sleep(0.05)
     prompt()
 
 
