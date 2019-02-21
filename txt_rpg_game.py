@@ -354,84 +354,84 @@ def zones():
         a3 = 18 * " "
     if visited_places["Salacite cavern"] == True:
         if myPlayer.location == "Salacite cavern":
-            a4 = "You are here"
+            a4 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
         else:
             a4 = "Salacite cavern"
     else:
         a4 = 18 * " "
     if visited_places["Alchemist's lab"] == True:
         if myPlayer.location == "Alchemist's lab":
-            b1 = "You are here"
+            b1 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
         else:
             b1 = "Alchemist's lab"
     else:
         b1 = 18 * " "
     if visited_places["Cave entrance"] == True:
         if myPlayer.location == "Cave entrance":
-            b2 = "You are here"
+            b2 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
         else:
             b2 = "Cave entrance"
     else:
         b2 = 18 * " "
     if visited_places["Cavern swamp"] == True:
         if myPlayer.location == "Cavern swamp":
-            b3 = "You are here"
+            b3 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
         else:
             b3 = "Cavern swamp"
     else:
         b3 = 18 * " "
     if visited_places["Grave"] == True:
         if myPlayer.location == "Grave":
-            b4 = "You are here"
+            b4 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
         else:
             b4 = "Grave"
     else:
         b4 = 18 * " "
     if visited_places["Lost man's hide"] == True:
         if myPlayer.location == "Lost man's hide":
-            c1 = "You are here"
+            c1 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
         else:
             c1 = "Lost man's hide"
     else:
         c1 = 18 * " "
     if visited_places["Room of altar"] == True:
         if myPlayer.location == "Room of altar":
-            c2 = "You are here"
+            c2 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
         else:
             c2 = "Room of altar"
     else:
         c2 = 18 * " "
     if visited_places["Mirrors cavern"] == True:
         if myPlayer.location == "Mirrors cavern":
-            c3 = "You are here"
+            c3 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
         else:
             c3 = "Mirrors cavern"
     else:
         c3 = 18 * " "
     if visited_places["Goblin's cavern"] == True:
         if myPlayer.location == "Goblin's cavern":
-            c4 = "You are here"
+            c4 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
         else:
             c4 = "Goblin's cavern"
     else:
         c4 = 18 * " "
     if visited_places["Christall cavern"] == True:
         if myPlayer.location == "Christall cavern":
-            d1 = "You are here"
+            d1 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
         else:
             d1 = "Christall cavern"
     else:
         d1 = 18 * " "
     if visited_places["Haunted cavern"] == True:
         if myPlayer.location == "Haunted cavern":
-            d2 = "You are here"
+            d2 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
         else:
             d2 = "Haunted cavern"
     else:
         d2 = 18 * " "
     if visited_places["Hide-out"] == True:
         if myPlayer.location == "Hide-out":
-            d3 = "You are here"
+            d3 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
         else:
             d3 = "Hide-out"
     else:
