@@ -232,18 +232,19 @@ def print_location():
         sys.stdout.flush()
         time.sleep(0.05)
 
+
 def prompt():
     print_location()
     print("\n" + "==========================")
     print("What would you like to do?")
     action = input("->")
-    acceptable_actions = ["move", "go", "travel" "walk", "quit", "examine", "inspect", "interact", "look"]
+    acceptable_actions = ["move", "go", "travel" "walk", "quit", "run", "examine", "inspect", "interact", "look", "attack", "magic attack" "use", "equip", "open"]
     while action.lower() not in acceptable_actions:
         print("Unknown action, try again.\n")
         action = input("->")
     if action.lower() == "quit":
         sys.exit()
-    elif action.lower() in ["move", "go", "travel" "walk"]:
+    elif action.lower() in ["move", "go", "travel" "walk", "run"]:
         player_move(action.lower())
     elif action.lower() in ["examine", "inspect", "interact"]:
         player_examin(action.lower())
@@ -379,6 +380,13 @@ def setup_game():
     time.sleep(1)
     os.system('clear')
     main_game_loop()
+
+
+def roll_dice():
+    player_dice = random.randint(1, 100)
+    print('You rolled ' + player_dice)
+    enemy_dice = random.randint(1, 100)
+    print('Your enemy has rolled ' + enemy_dice)
 
 
 second_screen()
