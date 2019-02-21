@@ -241,8 +241,6 @@ def print_location():
         prompt()
 
 
-
-
 def prompt():
     print("\n" + "==========================")
     print("What would you like to do?")
