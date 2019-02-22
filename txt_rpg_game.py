@@ -69,7 +69,7 @@ solved_places = {
 
 visited_places = {
                     "Treasure Room": False, "Spider's Nest": False, "Hall of Runes": False, "Stalactite Cavern": False,
-                    "Alchemist's Lab": False, "Cave Entrance": True, "Cavern Swamp": False, "Graveyard": False,
+                    "Alchemist's Lab": False, "Cave Entrance": False, "Cavern Swamp": False, "Graveyard": False,
                     "Lost Man's Hide": False, "Room of Altar": False, "Cavern of Mirrors": False, "Goblin's Hollow": False,
                     "Crystal Cavern": False, "Haunted Cavern": False, "Hide-out": False, "Smuggler's Hide": False, }
 
@@ -268,6 +268,7 @@ def print_location():
 
 
 def prompt():
+    visited_places[myPlayer.location] = True
     print("\n" + "==========================")
     print("What would you like to do?")
     action = input("-> ")
@@ -278,7 +279,10 @@ def prompt():
     if action.lower() == "quit":
         sys.exit()
     elif action.lower() in ["move", "go", "travel" "walk"]:
-        player_move(action.lower())
+        if "torch" not in myPlayer.backpack:
+            print("\nYou cannot move because you see nothing. Find a torch!")
+        else:
+            player_move(action.lower())
     elif action.lower() in ["examine", "inspect", "interact"]:
         player_examine(action.lower())
     elif action.lower() in ["look"]:
@@ -287,7 +291,10 @@ def prompt():
         player_attack(action.lower())
     elif action.lower() in ["status"]:
         status()
-        zones()
+        if "map" in myPlayer.backpack:
+            zones()
+        else:
+            print("Your map: Your map is LOCKED now. You have to find a map to unlock it and see where are you")
     elif action.lower() in ["talk"]:
         talk(action.lower())
     elif action.lower() in ["run", "flee"]:
@@ -315,7 +322,7 @@ def status():
     print("Your defense is: " + str(myPlayer.defense))
     print("Your armor is: " + str(myPlayer.armor))
     print("Your luck is: " + str(myPlayer.luck))
-
+    print("Yor backpack contains: " + str(myPlayer.backpack))
 
 def zones():
 
@@ -337,7 +344,7 @@ def zones():
         if myPlayer.location == "Hall of Runes":
             a3 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
         else:
-            a3 = int((20 - len("Hall of Runes")) / 2 + 2) * " " + "Hall of Runes" + int((20 - len("Hall of Runes")) / 2 + 2) * " "
+            a3 = int((20 - len("Hall of Runes")) / 2) * " " + "Hall of Runes" + int((20 - len("Hall of Runes")) / 2 - 1) * " "
     else:
         a3 = 18 * " "
     if visited_places["Stalactite Cavern"] == True:
@@ -372,7 +379,7 @@ def zones():
         if myPlayer.location == "Graveyard":
             b4 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
         else:
-            b4 = int((20 - len("Graveyard")) / 2 + 1) * " " + "Graveyard" + int((20 - len("Graveyard")) / 2 - 2) * " "
+            b4 = int((20 - len("Graveyard")) / 2) * " " + "Graveyard" + int((20 - len("Graveyard")) / 2 - 1) * " "
     else:
         b4 = 18 * " "
     if visited_places["Lost Man's Hide"] == True:
@@ -393,65 +400,65 @@ def zones():
         if myPlayer.location == "Cavern of Mirrors":
             c3 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
         else:
-            c3 = int((20 - len("Cavern of Mirrors")) / 2 - 1) * " " + "Cavern of Mirrors" + int((20 - len("Cavern of Mirrors")) / 2 - 1) * " "
+            c3 = int((20 - len("Cavern of Mirrors")) / 2 - 1) * " " + "Cavern of Mirrors" + int((20 - len("Cavern of Mirrors")) / 2) * " "
     else:
         c3 = 18 * " "
     if visited_places["Goblin's Hollow"] == True:
         if myPlayer.location == "Goblin's Hollow":
             c4 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
         else:
-            c4 = "Goblin's Hollow"
+            c4 = int((20 - len("Goblin's Hollow")) / 2 - 1) * " " + "Goblin's Hollow" + int((20 - len("Goblin's Hollow")) / 2) * " "
     else:
         c4 = 18 * " "
-    if visited_places["Crystal Cavern"] == True:
+    if visited_places["Crystal Cavern"] == True: 
         if myPlayer.location == "Crystal Cavern":
             d1 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
         else:
-            d1 = "Crystal Cavern"
+            d1 = int((20 - len("Crystal Cavern")) / 2 - 1) * " " + "Crystal Cavern" + int((20 - len("Crystal Cavern")) / 2 - 1) * " "
     else:
         d1 = 18 * " "
     if visited_places["Haunted Cavern"] == True:
         if myPlayer.location == "Haunted Cavern":
             d2 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
         else:
-            d2 = "Haunted Cavern"
+            d2 = int((20 - len("Haunted Cavern")) / 2 - 1) * " " + "Haunted Cavern" + int((20 - len("Haunted Cavern")) / 2 - 1) * " "
     else:
         d2 = 18 * " "
     if visited_places["Hide-out"] == True:
         if myPlayer.location == "Hide-out":
             d3 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
         else:
-            d3 = "Hide-out"
+            d3 = int((20 - len("Hide-out")) / 2 - 1) * " " + "Hide-out" + int((20 - len("Hide-out")) / 2 - 1) * " "
     else:
         d3 = 18 * " "
     if visited_places["Smuggler's Hide"] == True:
         if myPlayer.location == "Smuggler's Hide":
-            d4 = (20 - len("You are here") / 2) * " " + "You are here" + (20 - len("You are here") / 2) * " "
+            d4 = int((20 - len("You are here")) / 2 - 1) * " " + "You are here" + int((20 - len("You are here")) / 2 - 1) * " "
         else:
-            d4 = "Smuggler's Hide"
+            d4 = int((20 - len("Smuggler's Hide")) / 2 -1) * " " + "Smuggler's Hide" + int((20 - len("Smuggler's Hide")) / 2) * " "
     else:
         d4 = 18 * " "
-    
-    len_of_map = 4 * 20 + 3
-
-    print(" " + len_of_map * "–")
-    print("| " + len_of_map * " ")
+    print("Your map is UNLOCKED: ")
+    len_of_map = 4 * 20 + 2
+    print("")
+    print(" " + len_of_map * "–"+"–")
+    print("| " + len_of_map * " " + "|")
     print("| "+a1+" | "+a2+" | "+a3+" | "+a4+" |")
-    print("| " + len_of_map * " ")
-    print("| " + len_of_map * "–")
-    print("| " + len_of_map * " ")
+    print("| " + len_of_map * " " + "|")
+    print("| " + len_of_map * "–" + "|")
+    print("| " + len_of_map * " " + "|")
     print("| "+b1+" | "+b2+" | "+b3+" | "+b4+" |")
-    print("| " + len_of_map * " ")
-    print("| " + len_of_map * "–")
-    print("| " + len_of_map * " ")
+    print("| " + len_of_map * " " + "|")
+    print("| " + len_of_map * "–" + "|")
+    print("| " + len_of_map * " " + "|")
     print("| "+c1+" | "+c2+" | "+c3+" | "+c4+" |")
-    print("| " + len_of_map * " ")
-    print("| " + len_of_map * "–")
-    print("| " + len_of_map * " ")
+    print("| " + len_of_map * " " + "|")
+    print("| " + len_of_map * "–" + "|")
+    print("| " + len_of_map * " " + "|")
     print("| "+d1+" | "+d2+" | "+d3+" | "+d4+" |")
-    print("| " + len_of_map * " ")
-    print("| " + len_of_map * "–")
-    print(" " + len_of_map * " ")
+    print("| " + len_of_map * " " + "|")
+    print(" " + len_of_map * "–"+"–")
+    print("")
 
 
 def player_look(action):
