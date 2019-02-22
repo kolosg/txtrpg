@@ -1,4 +1,4 @@
-torch,You have a torch. Now you can see. Maybe you should "look" around...,torch
-rock,You have map now. Check your status to see where you are. Hopefully you won't get lost now...HaHaHaaa,map
+torch,You take the torch off the wall and suddenly you can see everything around you. Maybe you should "look" around more closely...,torch
+rock,You found a map. Check your 'status' to see where you are. Hopefully you won't get lost now...HaHaHaaa,map
 altar,You feel like praying here. As you knee down in front of it a beautifal beam of light shines on you...And you see something carved at the bottom of it...You read it.,fragments,2HS
-
+heap,After a closer look you find some gold coins. Not sure what good it will do to you in these caves but you put it away nevertheless for later use...,gold,37

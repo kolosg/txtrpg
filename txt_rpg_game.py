@@ -77,9 +77,10 @@ visited_places = {
 
 zone_map = {"Treasure Room": {
                     DESCRIPTION: "You have arrived in quickly builded wooden room.\nThere's a heap in the corner, covered whith some nasty rags.\n",
-                    LOOK: "There's no more interesting thing except of the mysterious heap...\n",
+                    LOOK: "There's no more interesting things except for the mysterious heap...\n",
                     SOLVED: False,
                     DONE : "done",
+                    ITEMS: "heap",
                     UP: "",
                     DOWN: "Alchemist's Lab",
                     LEFT: "",
@@ -89,7 +90,7 @@ zone_map = {"Treasure Room": {
                     DESCRIPTION: "You enter an ominous cavern. You see huge spider webs all around you...\n",
                     LOOK: "Not far from you realize there is disgusting spider lurking in the shadows.\n",
                     SOLVED: False,
-                    DONE : "done",
+                    DONE : "You have already collected everything here.\nYou can go ahead to the south, west, east.\n",
                     ITEMS: "",
                     UP: "",
                     DOWN: "Cave Entrance",
@@ -512,8 +513,9 @@ def player_examine(action):
     if answer.lower() in zone_map[myPlayer.location][ITEMS]:
         with open("items.txt", "r") as item:
             for line in item:
-                if answer in line:
-                    item_list.append(line.split(','))
+                line = line.split(',')
+                if answer == line[0]:
+                    item_list.append(line)
         zone_map[myPlayer.location][ITEMS] = zone_map[myPlayer.location][ITEMS].replace(answer, "")
         if len(item_list[0]) == 3:
             if item_list[0][2][:-1] not in myPlayer.backpack:
@@ -529,7 +531,6 @@ def player_examine(action):
                     myPlayer.backpack[item_list[0][2]] += int(item_list[0][3][:-1])
                 except:
                     myPlayer.backpack[item_list[0][2]] += item_list[0][3][:-1]
-        print(myPlayer.backpack)
         for character in item_list[0][1]:
             sys.stdout.write(character)
             sys.stdout.flush()
@@ -537,7 +538,7 @@ def player_examine(action):
         if zone_map[myPlayer.location][ITEMS] == "":
             solved_places[myPlayer.location] = True
             print("")
-            print("You solved everything in this room. Go ahead!")
+            print("\nYou solved everything in this room. Go ahead!")
         prompt()
     else:
         print("There is no such thing here...")
@@ -583,7 +584,7 @@ def setup_game():
     if myPlayer.job in ['warrior']:
         myPlayer.hp = 340
         myPlayer.mp = 20
-        myPlayer.attack = 10
+        myPlayer.attack = 25
         myPlayer.original_attack = 10
         myPlayer.magic_attack = 1
         myPlayer.defense = 19
@@ -593,13 +594,13 @@ def setup_game():
         myPlayer.hp = 240
         myPlayer.mp = 120
         myPlayer.attack = 4
-        myPlayer.magic_attack = 18
+        myPlayer.magic_attack = 33
         myPlayer.defense = 8
         myPlayer.armor = 0
     if myPlayer.job in ['priest']:
         myPlayer.hp = 280
         myPlayer.mp = 80
-        myPlayer.attack = 10
+        myPlayer.attack = 20
         myPlayer.magic_attack = 10
         myPlayer.defense = 10
         myPlayer.armor = 0
@@ -647,6 +648,7 @@ def player_attack(action):
     if myPlayer.location == "Spider's Nest":
         if myPlayer.hp > 0 and spider.hp > 0:
             print("")
+            print("Attack phase: \n")
             player_dice = random.randint(1, 100)
             print('You rolled ' + str(player_dice))
             opponent_dice = random.randint(1, 100)
@@ -656,35 +658,119 @@ def player_attack(action):
             difference = myPlayer.attack - spider.defense
             if difference > 0:
                 spider.hp -= difference
-                print(str(spider.name) + " lost " + str(difference) + ' health. ' + str(spider.name) + "'s hp is: " + str(spider.hp))
-                print(str(myPlayer.name) + "'s hp is: " + str(myPlayer.hp) + "\n")
+                enemy_lost = str(spider.name) + " lost " + str(difference) + ' health. ' + str(spider.name) + "'s hp is: " + str(spider.hp) + '\n'
+                for character in enemy_lost:
+                    sys.stdout.write(character)
+                    sys.stdout.flush()
+                    time.sleep(0.01)
+                player_health = str(myPlayer.name) + "'s hp is: " + str(myPlayer.hp) + "\n"
+                for character in player_health:
+                    sys.stdout.write(character)
+                    sys.stdout.flush()
+                    time.sleep(0.01)
             else:
-                print(str(spider.name) + " defended!")
+                enemy_defend = str(spider.name) + " defended!\n"
+                for character in enemy_defend:
+                    sys.stdout.write(character)
+                    sys.stdout.flush()
+                    time.sleep(0.01)
             myPlayer.attack = myPlayer.original_attack
             spider.defense = spider.original_defense
+            if spider.hp > 0:
+                print("\nDefense phase: \n")
+                player_dice = random.randint(1, 100)
+                print('You rolled ' + str(player_dice))
+                opponent_dice = random.randint(1, 100)
+                print('Your enemy has rolled ' + str(opponent_dice) + "\n")
+                myPlayer.defense += player_dice
+                spider.attack += opponent_dice
+                difference = spider.attack - myPlayer.defense
+                if difference > 0:
+                    myPlayer.hp -= difference
+                    player_lost = str(myPlayer.name) + " lost " + str(difference) + ' health. ' + str(myPlayer.name) + "'s hp is: " + str(myPlayer.hp) + '\n'
+                    for character in player_lost:
+                        sys.stdout.write(character)
+                        sys.stdout.flush()
+                        time.sleep(0.01)
+                    enemy_hp = str(spider.name) + "'s hp is: " + str(spider.hp) + "\n"
+                    for character in enemy_hp:
+                        sys.stdout.write(character)
+                        sys.stdout.flush()
+                        time.sleep(0.01)
+                else:
+                    player_defeated = str(myPlayer.name) + " defended!\n"
+                    for character in player_defeated:
+                        sys.stdout.write(character)
+                        sys.stdout.flush()
+                        time.sleep(0.01)
+                myPlayer.defense = myPlayer.original_defense
+                spider.attack = spider.original_attack
+            if spider.hp < 0:
+                defeated = "\n" + spider.name + " is defeated!\n"
+                for character in defeated:
+                    sys.stdout.write(character)
+                    sys.stdout.flush()
+                    time.sleep(0.01)
+                message = "\nNext to the " + spider.name + "'s body you see a strange 'fragment'\n."
+                for character in message:
+                    sys.stdout.write(character)
+                    sys.stdout.flush()
+                    time.sleep(0.01)
+                zone_map[myPlayer.location][ITEMS] += "fragment"
+                with open("items.txt", "r") as items:
+                    s = []
+                    for line in items:
+                        s.append([line])
+                    s.append(["fragment,That's a strange thing to find. It might become handy later. You put it in your backpack.,fragments,4ZX\n"])
+                with open("items.txt", "w") as items:
+                    for lists in s:
+                        row = ','.join(lists)
+                        items.write(row)
+            elif myPlayer.hp < 0:
+                print("You are defeated")
+        else:
+            print("There is nothing to attack")
+        prompt()
+    if myPlayer.location == "Goblin's Hollow":
+        if myPlayer.hp > 0 and goblin.hp > 0:
+            print("")
+            player_dice = random.randint(1, 100)
+            print('You rolled ' + str(player_dice))
+            opponent_dice = random.randint(1, 100)
+            print('Your enemy has rolled ' + str(opponent_dice) + "\n")
+            myPlayer.attack += player_dice
+            goblin.defense += opponent_dice
+            difference = myPlayer.attack - goblin.defense
+            if difference > 0:
+                goblin.hp -= difference
+                print(str(goblin.name) + " lost " + str(difference) + ' health. ' + str(goblin.name) + "'s hp is: " + str(goblin.hp))
+                print(str(myPlayer.name) + "'s hp is: " + str(myPlayer.hp) + "\n")
+            else:
+                print(str(goblin.name) + " defended!")
+            myPlayer.attack = myPlayer.original_attack
+            goblin.defense = goblin.original_defense
             player_dice = random.randint(1, 100)
             print('You rolled ' + str(player_dice))
             opponent_dice = random.randint(1, 100)
             print('Your enemy has rolled ' + str(opponent_dice) + "\n")
             myPlayer.defense += player_dice
-            spider.attack += opponent_dice
-            difference = spider.attack - myPlayer.defense
+            goblin.attack += opponent_dice
+            difference = goblin.attack - myPlayer.defense
             if difference > 0:
                 myPlayer.hp -= difference
                 print(str(myPlayer.name) + " lost " + str(difference) + ' health. ' + str(myPlayer.name) + "'s hp is: " + str(myPlayer.hp))
-                print(str(spider.name) + "'s hp is: " + str(spider.hp) + "\n")
+                print(str(goblin.name) + "'s hp is: " + str(goblin.hp) + "\n")
             else:
                 print(str(myPlayer.name) + " defended!\n")
             myPlayer.defense = myPlayer.original_defense
-            spider.attack = spider.original_attack
-            if spider.hp < 0:
-                print(str(spider.name) + " is defeated!")
+            goblin.attack = goblin.original_attack
+            if goblin.hp < 0:
+                print(str(goblin.name) + " is defeated!")
             elif myPlayer.hp < 0:
                 print("You are defeated")
         else:
             print("There is nothing to attack")
-        prompt() 
-
+        prompt()
 
 def main():
     second_screen()
