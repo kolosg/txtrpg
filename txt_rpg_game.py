@@ -259,13 +259,13 @@ def print_location():
         for character in zone_map[myPlayer.location][DESCRIPTION]:
             sys.stdout.write(character)
             sys.stdout.flush()
-            time.sleep(0.01)
+            time.sleep(0.05)
     else:
         print("# " + myPlayer.location.upper() + " #\n")
         for character in zone_map[myPlayer.location][DONE]:
             sys.stdout.write(character)
             sys.stdout.flush()
-            time.sleep(0.01)
+            time.sleep(0.05)
         prompt()
 
 
@@ -468,12 +468,12 @@ def player_look(action):
         for character in zone_map[myPlayer.location][DONE]:
             sys.stdout.write(character)
             sys.stdout.flush()
-            time.sleep(0.01)
+            time.sleep(0.05)
     else:
         for character in zone_map[myPlayer.location][LOOK]:
             sys.stdout.write(character)
             sys.stdout.flush()
-            time.sleep(0.01)
+            time.sleep(0.05)
     prompt()
 
 
@@ -541,7 +541,7 @@ def player_examine(action):
         for character in item_list[0][1]:
             sys.stdout.write(character)
             sys.stdout.flush()
-            time.sleep(0.01)
+            time.sleep(0.05)
         if zone_map[myPlayer.location][ITEMS] == "":
             solved_places[myPlayer.location] = True
             print("")
@@ -563,7 +563,7 @@ def setup_game():
     for character in question1:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.01)
+        time.sleep(0.05)
     player_name = input('-> ')
     myPlayer.name = player_name
 
@@ -572,11 +572,11 @@ def setup_game():
     for character in question2:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.01)
+        time.sleep(0.05)
     for character in question2added:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.01)
+        time.sleep(0.05)
     player_job = input('-> ')
     valid_jobs = ['warrior', 'mage', 'priest']
     if player_job.lower() in valid_jobs:
@@ -616,9 +616,9 @@ def setup_game():
     for character in question3:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.01)
+        time.sleep(0.05)
 
-    """speech1 = 'You have finally finished your training in the ' + player_job + ' clan\n'
+    speech1 = 'You have finally finished your training in the ' + player_job + ' clan\n'
     speech2 = 'The head of the ' + player_job + ' clan gives you, a special mission.\n'
     speech3 = 'He tells you that a member of the Clan has become a betrayer and he stole the Golden Idol of the Clan\n'
     speech4 = 'Your mission will be to find the traitor and bring back the Golden Idol! Your master tells you where to look for the traitor..\n'
@@ -627,23 +627,23 @@ def setup_game():
     for character in speech1:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.01)
+        time.sleep(0.05)
     for character in speech2:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.01)
+        time.sleep(0.05)
     for character in speech3:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.01)
+        time.sleep(0.05)
     for character in speech4:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.01)
+        time.sleep(0.05)
     for character in speech5:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(0.01)"""
+        time.sleep(0.05)
 
     time.sleep(1)
     os.system('clear')
@@ -669,18 +669,18 @@ def player_attack(action):
                 for character in enemy_lost:
                     sys.stdout.write(character)
                     sys.stdout.flush()
-                    time.sleep(0.01)
+                    time.sleep(0.05)
                 player_health = str(myPlayer.name) + "'s hp is: " + str(myPlayer.hp) + "\n"
                 for character in player_health:
                     sys.stdout.write(character)
                     sys.stdout.flush()
-                    time.sleep(0.01)
+                    time.sleep(0.05)
             else:
                 enemy_defend = str(spider.name) + " defended!\n"
                 for character in enemy_defend:
                     sys.stdout.write(character)
                     sys.stdout.flush()
-                    time.sleep(0.01)
+                    time.sleep(0.05)
             myPlayer.attack = myPlayer.original_attack
             spider.defense = spider.original_defense
             if spider.hp > 0:
@@ -698,18 +698,18 @@ def player_attack(action):
                     for character in player_lost:
                         sys.stdout.write(character)
                         sys.stdout.flush()
-                        time.sleep(0.01)
+                        time.sleep(0.05)
                     enemy_hp = str(spider.name) + "'s hp is: " + str(spider.hp) + "\n"
                     for character in enemy_hp:
                         sys.stdout.write(character)
                         sys.stdout.flush()
-                        time.sleep(0.01)
+                        time.sleep(0.05)
                 else:
                     player_defeated = str(myPlayer.name) + " defended!\n"
                     for character in player_defeated:
                         sys.stdout.write(character)
                         sys.stdout.flush()
-                        time.sleep(0.01)
+                        time.sleep(0.05)
                 myPlayer.defense = myPlayer.original_defense
                 spider.attack = spider.original_attack
             if spider.hp < 0:
@@ -717,12 +717,12 @@ def player_attack(action):
                 for character in defeated:
                     sys.stdout.write(character)
                     sys.stdout.flush()
-                    time.sleep(0.01)
+                    time.sleep(0.05)
                 message = "\nNext to the " + spider.name + "'s body you see a strange 'fragment'\n."
                 for character in message:
                     sys.stdout.write(character)
                     sys.stdout.flush()
-                    time.sleep(0.01)
+                    time.sleep(0.05)
                 zone_map[myPlayer.location][ITEMS] += "fragment"
                 with open("items.txt", "r") as items:
                     s = []
