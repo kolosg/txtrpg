@@ -16,31 +16,32 @@ class player:
         self.game_over = False
 
 
-
 class spider:
     def __init__(self):
         self.name = 'Giant Spider'
-        self.hp = 170
+        self.hp = 85
         self.mp = 0
         self.status_effects = {'poisonous':-5}
-        self.location = 'c2'
+        self.location = "Spider's Nest"
         self.attack = 5
         self.original_attack = 5
         self.defense = 5
         self.original_defense = 5
         self.armor = 0
-        self.backpack = {"fragment": '2HS'}      
+        self.backpack = {"fragment": '4ZX'}      
 
 
 class goblin:
     def __init__(self):
         self.name = 'Angry Goblin'
-        self.hp = 330
+        self.hp = 125
         self.mp = 0
         self.status_effects = {'stun':0}
-        self.location = 'a4'
+        self.location = "Goblin's Hollow"
         self.attack = 15
+        self.original_attack = 15
         self.defense = 15
+        self.original_defense = 15
         self.armor = 1
 
 
